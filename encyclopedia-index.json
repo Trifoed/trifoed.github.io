@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "encyclopedia",
+  "protocol": "HMT12856",
+  "canonical": "https://bipod.pages.dev/",
+  "title_fa": "دانشنامه ۳۸ فصلی بازار سرمایه",
+  "title_en": "38-Chapter Capital Market Encyclopedia",
+  "author": "Pedram Hemmati (HMT12856)",
+  "updated": "2026-10-31",
+  "disclaimer": {
+    "fa": "متن دانشنامه دیدگاه و تحلیل آموزشی نویسنده است. توصیه سرمایه‌گذاری یا وعده سود نیست.",
+    "en": "Encyclopedia content is the author's educational analysis. Not investment advice or profit promises."
+  },
+  "structure": {
+    "totalChapters": 38,
+    "status": "framework-ready",
+    "note_fa": "فهرست ساختاری برای توسعه تدریجی فصل‌ها. محتوای کامل هر فصل باید به‌صورت HTML خوانا و در صورت نیاز PDF ارائه شود."
+  },
+  "chapters": [
+    { "id": 1, "slug": "chapter-01", "title_fa": "مفاهیم پایه بازار سرمایه", "status": "planned" },
+    { "id": 2, "slug": "chapter-02", "title_fa": "ساختار بورس و فرابورس ایران", "status": "planned" },
+    { "id": 3, "slug": "chapter-03", "title_fa": "تابلوخوانی و جریان نقدینگی", "status": "planned" },
+    { "id": 4, "slug": "chapter-04", "title_fa": "شاخص کل و هم‌وزن (TEDPIX)", "status": "planned" },
+    { "id": 5, "slug": "chapter-05", "title_fa": "تحلیل تکنیکال کاربردی", "status": "planned" },
+    { "id": 6, "slug": "chapter-06", "title_fa": "روان‌شناسی معامله‌گر", "status": "planned" },
+    { "id": 7, "slug": "chapter-07", "title_fa": "مدیریت ریسک و سرمایه", "status": "planned" },
+    { "id": 8, "slug": "chapter-08", "title_fa": "صندوق‌های سرمایه‌گذاری", "status": "planned" },
+    { "id": 9, "slug": "chapter-09", "title_fa": "بورس کالا و انرژی", "status": "planned" },
+    { "id": 10, "slug": "chapter-10", "title_fa": "ارتباط بازار ایران و جهانی", "status": "planned" },
+    { "id": 11, "slug": "chapter-11", "title_fa": "پروتکل HMT12856 — مبانی", "status": "planned" },
+    { "id": 12, "slug": "chapter-12", "title_fa": "اشباح الگوریتم و حاکمیت الگوریتمیک", "status": "planned" },
+    { "id": 13, "slug": "chapter-13", "title_fa": "مانیفست بازار", "status": "planned" },
+    { "id": 14, "slug": "chapter-14", "title_fa": "پرتفوی شخصی و درس‌های عملی", "status": "planned" },
+    { "id": 15, "slug": "chapter-15", "title_fa": "ابزارهای پایش و رادار", "status": "planned" },
+    { "id": 16, "slug": "chapter-16", "title_fa": "فصل‌های تکمیلی ۱۶–۳۸", "status": "placeholder" }
+  ],
+  "relatedPages": [
+    {
+      "path": "/articles/hmt12856-algorithmic-ghosts/",
+      "title_fa": "اشباح الگوریتم خودمختار",
+      "note": "Separate article page recommended"
+    },
+    {
+      "path": "/articles/hmt12856-manifesto/",
+      "title_fa": "مانیفست HMT12856",
+      "note": "Separate article page recommended"
+    }
+  ],
+  "publishingRules": [
+    "Include publish date and last-updated date on every chapter page",
+    "Provide short summary at top",
+    "Full readable HTML body",
+    "Optional PDF download link (not the only version)",
+    "Link to previously published versions on LinkedIn/channels when available",
+    "Clear educational disclaimer — no investment advice"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0.0",
+  "protocol": "HMT12856",
+  "canonical": "https://bipod.pages.dev/",
+  "owner": {
+    "name": "Pedram Hemmati",
+    "alternateName": [
+      "پدرام همتی",
+      "اسماعیل همتی",
+      "حاج اسماعیل همتی",
+      "HMT12856",
+      "Hemmati149"
+    ],
+    "email": "pedram.hemmati68@gmail.com",
+    "role": "Market Protocol Architect · Author of 38-Chapter Capital Market Encyclopedia",
+    "portfolioNote": "Self-reported personal portfolio activity since Ordibehesht 1399 (SEJAM). Educational context only."
+  },
+  "seo": {
+    "title": "پدرام همتی | HMT12856 | رادار بازار سرمایه و دانشنامه ۳۸ فصلی",
+    "description": "پدرام همتی (اسماعیل / حاج اسماعیل همتی) — معمار پروتکل HMT12856، رادار زنده بورس و فرابورس ایران، دانشنامه ۳۸ فصلی بازار سرمایه. صرفاً آموزشی.",
+    "keywords": [
+      "پدرام همتی",
+      "حاج اسماعیل همتی",
+      "HMT12856",
+      "Hemmati149",
+      "رادار بورس",
+      "بورس تهران",
+      "فرابورس",
+      "TEDPIX",
+      "دانشنامه بازار سرمایه"
+    ],
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "language": "fa-IR",
+    "geo": {
+      "region": "IR",
+      "placename": "Iran"
+    }
+  },
+  "mirrors": {
+    "policy": "301 permanent redirect to canonical",
+    "list": [
+      "https://hemmati.netlify.app",
+      "https://pedram.netlify.app",
+      "https://hmt12856.netlify.app",
+      "https://trifoed.netlify.app",
+      "https://trifoed.github.io/Hemmati/"
+    ]
+  },
+  "channels": {
+    "telegram": [
+      "https://t.me/hemmati149",
+      "https://t.me/ZOLFAGARIHA",
+      "https://t.me/hamvatanha"
+    ],
+    "eitaa": "https://eitaa.com/hamvatanha",
+    "bale": "https://ble.ir/hamvatanha",
+    "rubika": "https://rubika.ir/hamvatanha_ir",
+    "x": "https://x.com/Hemmati149",
+    "instagram": [
+      "https://www.instagram.com/Hemmati149/",
+      "https://www.instagram.com/Haj_esmaeil_hemmati/"
+    ],
+    "whatsapp": "+989141282729"
+  },
+  "disclaimer": {
+    "fa": "تمامی محتوا، رادار نمادها و دانشنامه صرفاً آموزشی است و توصیه سرمایه‌گذاری، سیگنال خرید/فروش یا مشاوره مالی محسوب نمی‌شود.",
+    "en": "All content, market radar and encyclopedia material is strictly educational and does not constitute investment advice, buy/sell signals, or financial counseling."
+  },
+  "updated": "2026-10-31",
+  "build": "HMT12856-DEPLOY-FINAL"
+}

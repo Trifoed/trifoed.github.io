@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "radar",
+  "protocol": "HMT12856",
+  "canonical": "https://bipod.pages.dev/",
+  "updated": "2026-10-31",
+  "disclaimer": {
+    "fa": "رادار نمادها صرفاً جهت نمایش آموزشی و وضعیت لحظه‌ای است. پیشنهاد خرید، فروش یا تبلیغ مالی نیست.",
+    "en": "Symbol radar is for educational display and snapshot status only. Not investment advice."
+  },
+  "markets": [
+    {
+      "id": "bourse",
+      "label_fa": "بورس تهران",
+      "label_en": "Tehran Stock Exchange",
+      "priority": 1
+    },
+    {
+      "id": "otc",
+      "label_fa": "فرابورس",
+      "label_en": "OTC / Farabourse",
+      "priority": 2
+    },
+    {
+      "id": "energy",
+      "label_fa": "بورس انرژی",
+      "label_en": "Energy Exchange",
+      "priority": 3
+    },
+    {
+      "id": "commodity",
+      "label_fa": "بورس کالا",
+      "label_en": "Commodity Exchange",
+      "priority": 4
+    },
+    {
+      "id": "crypto",
+      "label_fa": "رمزارز",
+      "label_en": "Crypto",
+      "priority": 5
+    },
+    {
+      "id": "global",
+      "label_fa": "بازارهای جهانی",
+      "label_en": "Global (XAU, XAG, WTI, indices)",
+      "priority": 6
+    }
+  ],
+  "ticker": {
+    "defaultSpeedSec": 90,
+    "minSpeedSec": 30,
+    "maxSpeedSec": 300,
+    "fallbackText": "HMT12856  •  پدرام همتی (حاج اسماعیل)  •  مرکز عملیاتی بازارهای سرمایه‌پذیر  •  TEDPIX  •  BTC  •  ETH  •  XAU  •  XAG  •  WTI"
+  },
+  "portfolioMeta": {
+    "countKey": "hmt-pf-count",
+    "defaultCount": "464",
+    "defaultLabel": "SEJAM",
+    "note_fa": "تعداد نماد بر اساس گزارش شخصی مالک در کارگزاری مفید (خوداظهاری). صرفاً آموزشی."
+  },
+  "ui": {
+    "navShortLabel_fa": "ناخدا",
+    "gauge": "bull_bear_amp",
+    "langToggle": true
+  },
+  "refresh": {
+    "clientHintSec": 6,
+    "buildTickerIntervalSec": 8
+  }
+}
