@@ -218,6 +218,24 @@ main{padding:14px 14px 130px;max-width:520px;margin:0 auto}
 
 /* ── SYMBOL ROWS ── */
 .sym-grid{display:grid;grid-template-columns:1fr;gap:6px}
+.rq-card{
+  display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto;
+  gap:2px 10px;align-items:center;text-align:right;width:100%;
+  background:var(--panel);border:1px solid rgba(0,212,255,.22);border-radius:12px;
+  padding:10px 12px;cursor:pointer;color:var(--text);font:inherit;
+  transition:border-color .15s, box-shadow .15s;
+}
+.rq-card:hover,.rq-card:focus{border-color:var(--neon);box-shadow:0 0 16px rgba(0,212,255,.12);outline:none}
+.rq-kw{grid-column:1;grid-row:1/3;font-size:.65rem;color:var(--neon);border:1px solid rgba(0,212,255,.35);
+  border-radius:999px;padding:4px 8px;white-space:nowrap;align-self:center}
+.rq-sym{grid-column:2;font-weight:700;color:var(--gold);font-size:.95rem}
+.rq-name{grid-column:2;font-size:.72rem;color:var(--dim)}
+.rq-meta{grid-column:3;grid-row:1/3;text-align:left;font-family:var(--mono);font-size:.78rem}
+.rq-meta .chg{direction:ltr;unicode-bidi:isolate}
+.rq-live{display:block;font-size:.62rem;color:var(--success);font-style:normal;margin-top:2px}
+.rq-snap{display:block;font-size:.62rem;color:var(--faint);font-style:normal;margin-top:2px}
+.rq-jumps{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;grid-column:1/-1}
+.rq-jumps .card-link{flex:1;min-width:30%;text-align:center}
 .sym-row{background:var(--panel2);padding:7px 9px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.75rem;border-right:3px solid var(--dim);cursor:pointer}
 .sym-row:hover{background:rgba(0,212,255,.08)}
 .sym-row.positive{border-right-color:var(--success)} .sym-row.negative{border-right-color:var(--danger)}
@@ -349,6 +367,7 @@ html[data-layout="desktop"] #view-radar.active,html[data-layout="desktop"] #view
 html[data-layout="desktop"] #view-radar.active .hero,html[data-layout="desktop"] #view-markets.active .hero,html[data-layout="desktop"] #view-legacy.active .hero,html[data-layout="desktop"] #view-book.active .hero,html[data-layout="desktop"] #view-settings.active .hero,html[data-layout="desktop"] footer{grid-column:1/-1}
 html[data-layout="desktop"] .card{margin-bottom:0}
 html[data-layout="desktop"] .sym-grid{grid-template-columns:1fr 1fr;gap:8px}
+html[data-layout="desktop"] #radarQuick{grid-template-columns:1fr 1fr}
 html[data-layout="desktop"] .ch-grid{grid-template-columns:1fr 1fr;gap:8px}
 html[data-layout="desktop"] .stats-grid{grid-template-columns:repeat(4,1fr)}
 html[data-layout="desktop"] .chapters{grid-template-columns:repeat(4,1fr)}
@@ -677,25 +696,35 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
 .article-card .ag{font-size:.62rem;color:var(--neon);margin-bottom:8px}
 .article-card .ab{font-size:.78rem;line-height:1.85;color:var(--text)}
 
-/* ADVANCED RADAR PANEL (compact + richer) */
+/* ADVANCED RADAR PANEL — larger scope, compact center photo */
 .radar-box{
-  max-width: 320px !important;
+  max-width: 420px !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  padding: 8px !important;
+  padding: 12px !important;
 }
 .radar-stage, .radar-box .radar-stage{
-  width: min(200px, 58vw) !important;
-  height: min(200px, 58vw) !important;
-  margin: 4px auto 8px !important;
+  width: min(300px, 82vw) !important;
+  height: min(300px, 82vw) !important;
+  margin: 8px auto 10px !important;
 }
 .radar-box .ava, .radar-lock .ava{
-  width: 72px !important;
-  height: 86px !important;
+  width: 68px !important;
+  height: 80px !important;
+  max-width: 68px !important;
+  max-height: 80px !important;
 }
-.radar-lock{ inset: 30% !important; }
-.radar-title{ font-size: .65rem !important; }
-.radar-readout{ font-size: .68rem !important; margin: 4px 0 !important; }
+.radar-lock{ inset: 34% !important; }
+.radar-title{ font-size: .72rem !important; }
+.radar-readout{ font-size: .72rem !important; margin: 6px 0 !important; }
+html[data-layout="desktop"] .radar-stage, html[data-layout="desktop"] .radar-box .radar-stage{
+  width: min(340px, 42vw) !important;
+  height: min(340px, 42vw) !important;
+}
+html[data-layout="desktop"] .radar-box{ max-width: 460px !important; }
+html[data-layout="desktop"] .radar-box .ava, html[data-layout="desktop"] .radar-lock .ava{
+  width: 72px !important; height: 86px !important; max-width:72px !important; max-height:86px !important;
+}
 .stamp-lock{
   display:flex;align-items:center;justify-content:center;gap:6px;margin:4px auto;
   padding:4px 12px;border-radius:999px;border:1px solid rgba(34,197,94,.5);
@@ -799,6 +828,153 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
   100%{transform:translate3d(-100%,0,0)}
 }
 
+
+/* HMT Pro Groups Table */
+.hmt-table-wrap{overflow:auto;border:1px solid rgba(0,212,255,.2);border-radius:12px;background:rgba(3,10,20,.9)}
+table.hmt-tbl{width:100%;border-collapse:collapse;font-size:11px;min-width:520px}
+table.hmt-tbl th{position:sticky;top:0;background:#071018;color:var(--neon);font-weight:600;text-align:right;padding:7px 6px;border-bottom:1px solid rgba(0,212,255,.25);white-space:nowrap;font-size:10px}
+table.hmt-tbl td{padding:6px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+table.hmt-tbl tr:hover td{background:rgba(0,212,255,.05);cursor:pointer}
+table.hmt-tbl .c-up{color:var(--success)} table.hmt-tbl .c-dn{color:var(--danger)} table.hmt-tbl .c-fl{color:var(--gold)}
+table.hmt-tbl .sym{color:var(--gold);font-weight:700;font-size:11px}
+table.hmt-tbl .kw{font-size:9px;color:var(--neon);border:1px solid rgba(0,212,255,.3);border-radius:99px;padding:1px 5px;margin-left:4px}
+table.hmt-tbl .num{font-family:var(--mono);direction:ltr;unicode-bidi:isolate;text-align:left}
+.g-toolbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.g-toolbar button,.g-toolbar .g-chip{
+  font-size:10px;padding:6px 10px;border-radius:8px;border:1px solid rgba(0,212,255,.3);
+  background:rgba(0,212,255,.08);color:var(--text);cursor:pointer;font-family:inherit
+}
+.g-toolbar button.hot{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1)}
+.g-toolbar .g-chip{opacity:.85;cursor:default}
+#radarQuick{display:none!important}
+#symSampleNote{display:none!important}
+
+
+/* HMT Advanced Settings Console */
+#console .set-tabs{gap:5px}
+#console .set-tab{font-size:.68rem;padding:5px 10px}
+.set-dash{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:12px}
+.set-dash .d-card{background:var(--panel2);border:1px solid rgba(0,212,255,.22);border-radius:10px;padding:10px;text-align:center}
+.set-dash .d-card b{display:block;color:var(--gold);font-size:1.05rem;font-family:var(--mono)}
+.set-dash .d-card span{font-size:.62rem;color:var(--dim)}
+.set-pane label{display:block;font-size:.7rem;color:var(--dim);margin:8px 0 4px}
+.set-pane input[type=text],.set-pane input[type=password],.set-pane input[type=number],.set-pane textarea,.set-pane select{
+  width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--accent);
+  background:var(--panel2);color:var(--text);font:inherit;font-size:.78rem
+}
+.set-pane textarea{min-height:72px;resize:vertical}
+.set-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.set-actions .btn,.set-actions .set-btn{font-size:.72rem;padding:8px 12px}
+.ctrl-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:8px}
+.ctrl-table th,.ctrl-table td{border:1px solid rgba(0,212,255,.15);padding:6px;text-align:right}
+.ctrl-table th{background:#071018;color:var(--neon);position:sticky;top:0}
+.ctrl-table td code{color:var(--gold);font-size:9px}
+.seo-box{border:1px solid rgba(240,180,41,.3);border-radius:10px;padding:10px;margin:8px 0;background:rgba(240,180,41,.06);font-size:.72rem;line-height:1.7}
+.seo-box b{color:var(--gold)}
+
+
+/* HMT Dual Chronometer — Tehran + İstanbul */
+#chronoBar{
+  position:fixed;top:40px;left:0;right:0;z-index:1002;
+  height:28px;display:flex;align-items:stretch;justify-content:space-between;
+  background:linear-gradient(90deg,rgba(3,16,28,.98),rgba(8,12,24,.98));
+  border-bottom:1px solid rgba(0,212,255,.25);
+  font-family:ui-monospace,Consolas,"Vazirmatn",Tahoma,sans-serif;
+  padding:0 8px;gap:8px;box-sizing:border-box;
+}
+#chronoBar .ch-block{display:flex;align-items:center;gap:6px;min-width:0;flex:1}
+#chronoBar .ch-block.tr{justify-content:flex-start}
+#chronoBar .ch-block.ist{justify-content:flex-end;direction:ltr}
+#chronoBar .ch-tag{
+  font-size:8px;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(240,180,41,.35);
+  border-radius:4px;padding:1px 5px;white-space:nowrap
+}
+#chronoBar .ch-time{font-size:12px;font-weight:700;color:var(--neon);letter-spacing:.04em;white-space:nowrap}
+#chronoBar .ch-date{font-size:9px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ticker-wrap{top:68px!important}
+main{padding-top:98px!important}
+#topbar #clockBox,#topbar #dateBox{display:none!important}
+@media (max-width:420px){
+  #chronoBar .ch-date{display:none}
+  #chronoBar .ch-time{font-size:11px}
+}
+/* Journey / Path of HMT12856 */
+.journey-card{border:1px solid rgba(240,180,41,.3);border-radius:14px;padding:12px;margin-bottom:10px;background:linear-gradient(180deg,rgba(240,180,41,.06),rgba(0,0,0,.2))}
+.journey-card h3{color:var(--gold);font-size:.85rem;margin:0 0 6px}
+.journey-card p{font-size:.72rem;color:var(--dim);line-height:1.85;margin:0 0 6px}
+.journey-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.journey-metrics .jm{background:rgba(0,0,0,.35);border:1px solid rgba(0,212,255,.2);border-radius:8px;padding:8px;text-align:center}
+.journey-metrics .jm b{display:block;color:var(--neon);font-size:.9rem}
+.journey-metrics .jm span{font-size:.6rem;color:var(--dim)}
+.nb-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.nb-slot{border:1px dashed rgba(0,212,255,.3);border-radius:10px;min-height:90px;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:var(--dim);background:rgba(0,0,0,.25);overflow:hidden}
+.nb-slot img{width:100%;height:100%;object-fit:cover}
+
+
+/* HMT stack: topbar 40 + chrono 26 + ticker 28 + mission 32 = 126 */
+#chronoBar{height:26px!important}
+#ticker-wrap{top:66px!important;height:28px!important}
+#ticker{line-height:28px!important;font-size:11px!important}
+#missionStrip{
+  position:fixed;top:94px;left:0;right:0;z-index:1001;
+  height:32px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:0 10px;box-sizing:border-box;
+  background:linear-gradient(90deg,rgba(240,180,41,.08),rgba(0,212,255,.07),rgba(3,7,18,.98));
+  border-bottom:1px solid rgba(0,212,255,.22);
+  font-size:10px;color:var(--dim);
+}
+#missionStrip .ms-brand{color:var(--gold);font-weight:700;font-size:10px;white-space:nowrap}
+#missionStrip .ms-kw{
+  flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  color:var(--neon);font-family:ui-monospace,Consolas,monospace;font-size:10px;direction:rtl;
+}
+#missionStrip .ms-go{
+  border:1px solid rgba(0,212,255,.4);background:rgba(0,212,255,.1);color:var(--neon);
+  border-radius:999px;padding:3px 10px;font-size:9px;cursor:pointer;white-space:nowrap;font-family:inherit
+}
+#missionStrip .ms-go:active{transform:scale(.97)}
+main{padding-top:126px!important}
+#view-radar .hero{margin-top:6px!important;padding-top:4px!important}
+#langToggle{position:relative;z-index:1005;pointer-events:auto!important;min-width:42px}
+
+
+/* HMT Radar atmosphere — surgical, radar-only */
+.radar-matrix{
+  position:absolute;inset:8%;border-radius:50%;overflow:hidden;pointer-events:none;z-index:1;
+  opacity:0.20;font-family:ui-monospace,Consolas,monospace;font-size:8px;line-height:1.35;
+  color:rgba(0,212,255,.95);text-align:center;display:flex;flex-wrap:wrap;align-content:center;
+  justify-content:center;gap:2px 5px;padding:18% 12%;
+  mask-image:radial-gradient(circle at center, transparent 28%, #000 32%, #000 92%, transparent 98%);
+  -webkit-mask-image:radial-gradient(circle at center, transparent 28%, #000 32%, #000 92%, transparent 98%);
+}
+.radar-matrix span{white-space:nowrap;letter-spacing:.04em}
+.radar-hand{
+  position:absolute;left:50%;top:50%;width:2px;height:46%;
+  margin-left:-1px;margin-top:-46%;
+  background:linear-gradient(to top,rgba(0,242,255,.05),rgba(0,242,255,.55));
+  transform-origin:bottom center;
+  animation:hmtRadarHand 4.5s linear infinite;
+  z-index:3;pointer-events:none;
+  box-shadow:0 0 8px rgba(0,212,255,.35);
+  opacity:0.72;
+}
+.radar-hand:after{
+  content:"";position:absolute;left:50%;bottom:0;width:6px;height:6px;margin:0 0 -3px -3px;
+  border-radius:50%;background:rgba(0,212,255,.7);box-shadow:0 0 6px rgba(0,212,255,.6);
+}
+@keyframes hmtRadarHand{to{transform:rotate(360deg)}}
+.radar-info-lines{
+  margin:6px 0 2px;padding:8px 10px;border-radius:10px;
+  border:1px solid rgba(0,212,255,.22);background:rgba(0,12,22,.55);
+  font-size:.68rem;line-height:1.65;color:var(--dim);text-align:right;
+}
+.radar-info-lines b{color:var(--neon);font-weight:600}
+.radar-info-lines .ri2{color:var(--gold);font-size:.66rem}
+.radar-stage .radar-sweep{opacity:.55}
+.radar-stage .blips{z-index:4}
+.radar-stage .radar-lock{z-index:5}
+.radar-stage .radar-beam{z-index:3;opacity:.65}
+
 </style>
 <script id="settingsPayload" type="application/json">__PAYLOAD__</script>
 </head>
@@ -814,14 +990,30 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
 </noscript>
 
 <header id="topbar">
-  <span id="dateBox"></span>
+  <span class="hmt-badge" style="font-size:9px;color:var(--gold);letter-spacing:.12em;font-family:ui-monospace,Consolas,monospace">HMT12856</span>
   <div id="poem" data-i18n="poem">اِی نامِ تو بهترین سرآغاز / بی‌نامِ تو، نامه کِی کُنَم باز</div>
   <div style="display:flex;align-items:center;gap:6px">
     <button type="button" class="lang-toggle" id="langToggle" aria-label="Language">EN</button>
-    <div id="clockBox"></div>
   </div>
 </header>
+<div id="chronoBar" aria-label="Tehran and Istanbul clocks">
+  <div class="ch-block tr">
+    <span class="ch-tag">تهران</span>
+    <span class="ch-time" id="clkTehran">--:--:--</span>
+    <span class="ch-date" id="dateBox">—</span>
+  </div>
+  <div class="ch-block ist">
+    <span class="ch-date" id="dateIstanbul">—</span>
+    <span class="ch-time" id="clkIstanbul">--:--:--</span>
+    <span class="ch-tag">İSTANBUL</span>
+  </div>
+</div>
 <div id="ticker-wrap" aria-hidden="false"><div id="ticker">HMT12856  •  پدرام همتی (حاج اسماعیل)  •  مرکز عملیاتی بازارهای سرمایه پذیر  •  TEDPIX  •  BTC  •  ETH  •  XAU  •  XAG  •  WTI  •  اِی نامِ تو بهترین سرآغاز / بی‌نامِ تو، نامه کِی کُنَم باز  •  چه زیبا از قَفَس، پرواز کردم / تمامِ عشق را، ابراز کردم  •  HMT12856  •  پدرام همتی (حاج اسماعیل)  •  مرکز عملیاتی بازارهای سرمایه پذیر  •  TEDPIX  •  BTC  •  ETH  •  XAU  •  XAG  •  WTI  •  اِی نامِ تو بهترین سرآغاز / بی‌نامِ تو، نامه کِی کُنَم باز  •  چه زیبا از قَفَس، پرواز کردم / تمامِ عشق را، ابراز کردم  •  </div></div>
+<div id="missionStrip" role="region" aria-label="HMT mission">
+  <span class="ms-brand" id="msBrand">HMT12856 · همت۱۲۸۵۶</span>
+  <span class="ms-kw" id="msKw">پایش کلمات: خودرو · فولاد · بانک · پالایش · سیمان · صندوق</span>
+  <button type="button" class="ms-go" id="msGoGroups">گروه‌ها ←</button>
+</div>
 
 <main>
   <!-- ═══════════ VIEW: RADAR ═══════════ -->
@@ -845,6 +1037,8 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
         <span id="hudS">—</span>
       </div>
       <div class="radar-stage" id="stage">
+        <div class="radar-matrix" id="radarMatrix" aria-hidden="true"></div>
+        <div class="radar-hand" id="radarHand" aria-hidden="true"></div>
         <svg class="radar-rings" viewBox="0 0 200 200" aria-hidden="true">
           <circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="72"/>
           <circle cx="100" cy="100" r="48"/><circle cx="100" cy="100" r="28"/>
@@ -863,6 +1057,10 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
       <div class="radar-stamp" id="stampT">LOCK · —</div>
       <div class="radar-note">قفل چرخشی روی نماد · لمس بلیپ = قفل + جزئیات · ID-149</div>
       <div class="radar-readout" id="radarReadout">در حال اسکن بازار…</div>
+      <div class="radar-info-lines" id="radarInfoLines">
+        <div id="radarInfo1"><b>وضعیت پایش:</b> آخرین دادهٔ ثبت‌شده نمادها · خارج از ساعت معاملات = نمایش آخرین قیمت معتبر</div>
+        <div class="ri2" id="radarInfo2">کد همت۱۲۸۵۶ · پایش آموزشی خودرو/فولاد/بانک/پالایش · لمس بلیپ = جزئیات نماد</div>
+      </div>
       <div class="idx-links">
         <a href="https://www.tsetmc.com/" target="_blank" rel="noopener">TSETMC</a>
         <a href="https://www.tsetmc.com/MarketMap" target="_blank" rel="noopener">نقشه بازار</a>
@@ -1052,6 +1250,11 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
       <h1 data-i18n="mkt-groups-title">تابلوی گروه‌ها</h1>
       <p data-i18n="mkt-groups-sub">بورس · فرابورس · صندوق · انرژی · کالا · رمزارز</p>
     </div>
+    <div class="card" id="kwBoardCard" style="margin-bottom:12px">
+      <div class="card-h">رادار کلمات پرتکرار → نماد <span class="st">ادغام‌شده در گروه‌ها · پایش آموزشی</span></div>
+      <p class="card-text" style="font-size:.72rem;margin-bottom:8px">کلمات جستجوی پرتکرار که در بورس نماد دارند — کلیک = جزئیات و نمودار (کندل / صعود / رنج / نزول).</p>
+      <div class="sym-grid" id="kwBoard"></div>
+    </div>
     <div class="gtabs" id="gtabs">
       <button class="gtab on" data-g="bourse">بورس تهران</button>
       <button class="gtab" data-g="farabourse">فرابورس</button>
@@ -1062,9 +1265,30 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
     </div>
     <div class="card">
       <div class="card-h" id="gTitle">بورس تهران <span class="st" id="gStatus"></span></div>
-      <p class="card-text" id="gDesc"></p>
+      <p class="card-text" id="gDesc" style="font-size:.7rem"></p>
+      <div class="g-toolbar" id="gToolbar">
+        <button type="button" class="hot" id="btnRefreshGroup">↻ بروزرسانی تابلو (HMT)</button>
+        <button type="button" id="btnOpenTsetmc">TSETMC</button>
+        <span class="g-chip" id="gAsOf">آخرین داده: —</span>
+        <span class="g-chip" id="gMktState">وضعیت بازار: —</span>
+      </div>
     </div>
-    <div class="sym-grid" id="symGrid"></div>
+    <div class="hmt-table-wrap" id="symGridWrap">
+      <table class="hmt-tbl" id="symTable">
+        <thead>
+          <tr>
+            <th>نماد</th>
+            <th>کلمه</th>
+            <th>آخرین</th>
+            <th>پایانی</th>
+            <th>تغییر</th>
+            <th>روند</th>
+            <th>وضعیت</th>
+          </tr>
+        </thead>
+        <tbody id="symGrid"></tbody>
+      </table>
+    </div>
   
   </section>
 
@@ -1085,11 +1309,32 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
   <!-- ═══════════ VIEW: PORTFOLIO ═══════════ -->
     <section id="view-portfolio" class="view-panel">
     <div class="hero">
-      <div class="kicker" data-i18n="pf-kicker">HMT12856 — سبدگردانی و نوسان‌گیری</div>
-      <h1 data-i18n="pf-title">سبدگردانی و نوسان‌گیری</h1>
-      <p data-i18n="pf-sub">پدرام همتی · کارگزاری مفید / ایزی‌تریدر · سبد شخصی</p>
+      <div class="kicker" data-i18n="pf-kicker">HMT12856 — مسیر همت · سبد شخصی</div>
+      <h1 data-i18n="pf-title">مسیر همت۱۲۸۵۶</h1>
+      <p data-i18n="pf-sub">از ۱۶ هزار تومان · اردیبهشت ۱۳۹۹ · تا پرتفوی چندکارگزاری</p>
     </div>
-    <div class="pf-block" id="portfolioBlock">
+    <div class="journey-card" id="journeyStory">
+      <h3>شروع واقعی — بدون پشتوانه، با دفتر و پشتکار</h3>
+      <p>
+        حاج اسماعیل (پدرام) همتی از <b style="color:var(--gold)">اردیبهشت ۱۳۹۹</b> با حدود
+        <b style="color:var(--neon)">۱۶٬۰۰۰ تومان</b> و کد بورسی <b style="color:var(--gold)">همت۱۲۸۵۶</b>
+        در کارگزاری آگاه وارد بازار سرمایه شد — بدون پشتوانهٔ مالی، بدون ارتباط با گروه‌های بورسی، بدون تحصیلات مرتبط.
+        امروز در چندین کارگزاری فعال است؛ یک نمونهٔ مستند در لینکدین نشان می‌دهد مدیریت
+        <b style="color:var(--gold)">بیش از ۴۶۰ نماد</b> در سبد شخصی کارگزاری مفید.
+      </p>
+      <p style="font-size:.68rem">از روز اول خرید و فروش‌ها، هدف‌ها و آموخته‌ها در دفترهای شخصی ثبت شده‌اند. تصاویر دفتر، صدا و توضیح مالک از تنظیمات بارگذاری می‌شود.</p>
+      <div class="journey-metrics">
+        <div class="jm"><b>۱۳۹۹/۲</b><span>شروع · آگاه</span></div>
+        <div class="jm"><b>۱۶٬۰۰۰ ت</b><span>سرمایهٔ اولیه</span></div>
+        <div class="jm"><b>۴۶۰+</b><span>نماد مستند مفید</span></div>
+      </div>
+      <div class="nb-grid" id="notebookSlots">
+        <div class="nb-slot" id="nbSlot1">دفتر / یادداشت ۱ — از تنظیمات</div>
+        <div class="nb-slot" id="nbSlot2">دفتر / یادداشت ۲ — از تنظیمات</div>
+      </div>
+      <div id="journeyAudioBox" style="margin-top:8px;font-size:.68rem;color:var(--dim)">فایل صوتی توضیح مالک — پس از بارگذاری در تنظیمات اینجا پخش می‌شود.</div>
+    </div>
+    <div class="pf-block" id="portfolioBlock" style="font-size:.72rem">
       <div class="pf-h">
         <b data-i18n="pf-box-title">سبد پرتفوی شخصی</b>
         <span id="pfCountLabel">۴۶۴ نماد · SEJAM / MULTI-BROKER</span>
@@ -1159,7 +1404,7 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
 
     </section>
 
-  <!-- ═══════════ VIEW: BOOK ═══════════ --> -->
+  <!-- BOOK -->
   
   <!-- ═══════════ VIEW: ARTICLES ═══════════ -->
   <section id="view-articles" class="view-panel">
@@ -1224,18 +1469,104 @@ html[data-layout="desktop"] .modal-box{border-radius:18px;margin:4vh auto auto}
       </div>
 
       <div class="set-tabs" id="setTabs">
-        <button class="set-tab on" data-t="texts">متن‌ها</button>
+        <button class="set-tab on" data-t="dash">داشبورد</button>
+        <button class="set-tab" data-t="texts">متن‌ها</button>
         <button class="set-tab" data-t="media">رسانه‌ها</button>
         <button class="set-tab" data-t="folders">پوشه‌ها</button>
+        <button class="set-tab" data-t="seo">SEO / جستجو</button>
         <button class="set-tab" data-t="metadata">Metadata / Schema</button>
+        <button class="set-tab" data-t="radarctl">رادار / پایش</button>
         <button class="set-tab" data-t="vault">مخزن داده</button>
         <button class="set-tab" data-t="symbols">نمادها</button>
         <button class="set-tab" data-t="perms">مجوزها و انتشار</button>
         <button class="set-tab" data-t="ipo">عرضهٔ اولیه</button>
         <button class="set-tab" data-t="captain">ناخدا / زبان</button>
+        <button class="set-tab" data-t="journey">مسیر همت / دفاتر</button>
         <button class="set-tab" data-t="export">رمز و خروجی</button>
       </div>
-      <div class="card set-pane on" data-p="texts">
+      <div class="card set-pane on" data-p="dash">
+        <div class="card-h">داشبورد کنترل HMT12856 <span class="st">مرکز فرمان مالک</span></div>
+        <div class="set-dash" id="setDashStats">
+          <div class="d-card"><b id="dashSymCount">—</b><span>نماد در رادار</span></div>
+          <div class="d-card"><b id="dashLiveCount">—</b><span>دارای دادهٔ ذخیره‌شده</span></div>
+          <div class="d-card"><b id="dashKwCount">—</b><span>کلمهٔ پرتکرار</span></div>
+          <div class="d-card"><b id="dashAsOf">—</b><span>آخرین پایش</span></div>
+        </div>
+        <div class="set-actions">
+          <button type="button" class="btn" id="dashRefreshQuotes">↻ بروزرسانی همهٔ نقل‌قول‌ها</button>
+          <button type="button" class="btn" id="dashRebuildTicker">↻ بازسازی تیکر</button>
+          <button type="button" class="btn" id="dashClearQuoteCache">پاکسازی کش قیمت</button>
+          <button type="button" class="btn" id="dashOpenGroups">رفتن به گروه‌ها</button>
+        </div>
+        <div class="seo-box" style="margin-top:12px">
+          <b>کنترل یک‌نگاه:</b> از تب‌های زیر می‌توانید متن، SEO، رادار، نمادها، رسانه، مجوز و خروجی HTML را مدیریت کنید.
+          دکمهٔ بالای صفحه «ذخیره برای همیشه + اعمال زنده» همه را یکجا می‌نویسد.
+        </div>
+        <div style="max-height:220px;overflow:auto;margin-top:10px;border:1px solid rgba(0,212,255,.2);border-radius:10px">
+          <table class="ctrl-table" id="ctrlMapTable">
+            <thead><tr><th>بخش سایت</th><th>تب کنترل</th><th>کلید ذخیره‌سازی</th></tr></thead>
+            <tbody>
+              <tr><td>هدر / شعر / تیکر</td><td>متن‌ها</td><td><code>settings.texts</code></td></tr>
+              <tr><td>عکس رادار / خانواده</td><td>رسانه‌ها · پوشه‌ها</td><td><code>settings.media</code></td></tr>
+              <tr><td>عنوان گوگل / توضیح / robots</td><td>SEO / جستجو</td><td><code>settings.seo</code></td></tr>
+              <tr><td>Schema JSON-LD</td><td>Metadata</td><td><code>settings.meta</code></td></tr>
+              <tr><td>سرعت رادار / تعداد نماد</td><td>رادار / پایش</td><td><code>hmt-radar-cfg</code></td></tr>
+              <tr><td>فهرست نمادها</td><td>نمادها</td><td><code>settings.symbolsCustom</code></td></tr>
+              <tr><td>ناخدا / زبان</td><td>ناخدا / زبان</td><td><code>hmt-lang</code></td></tr>
+              <tr><td>آخرین قیمت‌ها</td><td>داشبورد</td><td><code>hmt-last-quotes</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card set-pane" data-p="seo">
+        <div class="card-h">SEO · دیده شدن در گوگل <span class="st">HMT Control</span></div>
+        <div class="seo-box">
+          <b>هدف برند:</b> پدرام همتی · HMT12856 · رادار بازار — نه فقط «اسماعیل همتی» (هم‌نام متوفی).
+          Canonical فعلی: <code>https://bipod.pages.dev/</code>
+        </div>
+        <label>Title (عنوان تب مرورگر / گوگل)</label>
+        <input type="text" id="s-seo-title" value="پدرام همتی | HMT12856 | رادار بازار سرمایه و دانشنامه ۳۸ فصلی">
+        <label>Meta Description</label>
+        <textarea id="s-seo-desc" rows="3">پدرام همتی (HMT12856) — رادار آموزشی بازار سرمایه، دانشنامه ۳۸ فصلی، پایش نمادهای هم‌نام با جستجوهای پرتکرار. صرفاً آموزشی.</textarea>
+        <label>کلمات کلیدی (با ویرگول)</label>
+        <input type="text" id="s-seo-keys" value="پدرام همتی, HMT12856, رادار بورس, دانشنامه بازار سرمایه, حاج اسماعیل همتی, خودرو, فولاد, شپنا">
+        <label>Canonical URL</label>
+        <input type="text" id="s-seo-canonical" value="https://bipod.pages.dev/" style="direction:ltr">
+        <label>robots</label>
+        <select id="s-seo-robots">
+          <option value="index, follow">index, follow (پیشنهادی)</option>
+          <option value="noindex, follow">noindex, follow</option>
+          <option value="index, nofollow">index, nofollow</option>
+        </select>
+        <div class="set-actions">
+          <button type="button" class="btn" id="btnApplySeo">اعمال SEO روی صفحه</button>
+          <button type="button" class="btn" id="btnSeoAudit">گزارش وضعیت SEO</button>
+        </div>
+        <pre id="seoAuditOut" style="font-size:.65rem;color:var(--dim);white-space:pre-wrap;margin-top:8px;max-height:160px;overflow:auto"></pre>
+      </div>
+
+      <div class="card set-pane" data-p="radarctl">
+        <div class="card-h">رادار · پایش · تیکر <span class="st">کنترل عملیاتی</span></div>
+        <label>سرعت چرخش قفل رادار (ms)</label>
+        <input type="number" id="s-radar-speed2" value="2800" min="1200" max="12000" step="200">
+        <label>حداکثر نماد روی بلیپ رادار</label>
+        <input type="number" id="s-radar-max2" value="24" min="6" max="60">
+        <label>بازهٔ بروزرسانی نقل‌قول گروه (ثانیه)</label>
+        <input type="number" id="s-quote-interval" value="120" min="30" max="600" step="10">
+        <label>نمایش برچسب صعود/رنج/نزول</label>
+        <select id="s-trend-labels">
+          <option value="1">فعال</option>
+          <option value="0">خاموش</option>
+        </select>
+        <div class="set-actions">
+          <button type="button" class="btn" id="btnApplyRadarCtl">اعمال روی رادار</button>
+          <button type="button" class="btn" id="btnForceQuoteNow">دریافت فوری قیمت‌ها</button>
+        </div>
+        <p style="font-size:.65rem;color:var(--dim);margin-top:8px">خارج از ساعت معاملات، آخرین دادهٔ ثبت‌شده نمایش داده می‌شود — نه صفر جعلی.</p>
+      </div>
+
+      <div class="card set-pane" data-p="texts">
         <label>متن هدر سایت (kicker)</label><input type="text" id="s-hero-kicker" value="HMT12856 · MARKET RADAR">
         <label>عنوان اصلی</label><input type="text" id="s-hero-title" value="پدرام همتی">
         <label>شعر بالای سایت</label><textarea id="s-poem" style="font-family:inherit;direction:rtl">اِی نامِ تو بهترین سرآغاز
@@ -1591,6 +1922,27 @@ XAU | metal | انس طلا | نمونه فلزات</textarea>
         <div class="set-row"><button class="set-btn" type="button" id="s-cap-apply">اعمال زنده تنظیمات ناخدا</button></div>
       </div>
 
+      <div class="card set-pane" data-p="journey">
+        <div class="card-h">مسیر همت۱۲۸۵۶ · دفاتر و مستندات <span class="st">فقط مالک</span></div>
+        <p class="card-text" style="font-size:.7rem;margin-bottom:8px">
+          اردیبهشت ۱۳۹۹ · ۱۶٬۰۰۰ تومان · کد همت۱۲۸۵۶ · کارگزاری آگاه → چندکارگزاری · نمونهٔ ۴۶۰+ نماد در مفید (مستند لینکدین).
+          تصاویر دفتر، یادداشت، صدا و توضیح خود را اینجا بارگذاری کنید تا در صفحهٔ پرتفوی / مسیر نمایش داده شود.
+        </p>
+        <label>متن مسیر (قابل ویرایش)</label>
+        <textarea id="s-journey-text" rows="4">از اردیبهشت ۱۳۹۹ با حدود ۱۶ هزار تومان و کد بورسی همت۱۲۸۵۶ در کارگزاری آگاه شروع کردم؛ بدون پشتوانه و بدون گروه. امروز در چند کارگزاری فعال‌ام و نمونهٔ مستند لینکدین بیش از ۴۶۰ نماد در مفید را نشان می‌دهد. همه چیز از دفترهای شخصی شروع شد.</textarea>
+        <label>تصویر دفتر / یادداشت ۱ (URL یا data:image)</label>
+        <textarea id="s-nb1" rows="2" placeholder="data:image/jpeg;base64,... یا https://..."></textarea>
+        <label>تصویر دفتر / یادداشت ۲</label>
+        <textarea id="s-nb2" rows="2" placeholder="data:image/jpeg;base64,..."></textarea>
+        <label>لینک صوت توضیح مالک (mp3/ogg URL)</label>
+        <input type="text" id="s-journey-audio" placeholder="https://.../voice.mp3" style="direction:ltr">
+        <label>لینک مستند لینکدین</label>
+        <input type="text" id="s-journey-linkedin" value="https://www.linkedin.com/in/pedram-hemmati" style="direction:ltr">
+        <div class="set-actions">
+          <button type="button" class="btn" id="btnSaveJourney">ذخیره و اعمال روی صفحهٔ مسیر</button>
+        </div>
+      </div>
+
       <div class="card set-pane" data-p="export">
         <label>تغییر رمز ورود</label><input type="password" id="s-pw1" placeholder="رمز جدید">
         <input type="password" id="s-pw2" placeholder="تکرار رمز جدید" style="margin-top:6px">
@@ -1698,120 +2050,143 @@ var CHANNELS=[
 /* ── symbol DB: sym | kind | name | snapshot price | snapshot chg ── */
 var KIND_LABEL={tse:"بورس/فرابورس · TSETMC",bourse:"بورس تهران",farabourse:"فرابورس",funds:"صندوق ETF",energy:"بورس انرژی",commodity:"بورس کالا",crypto:"رمزارز",metal:"فلزات",index:"شاخص"};
 var SYMS=[
+ /* شاخص‌ها */
  ["TEDPIX","index","شاخص کل بورس تهران",8333000,0.85],
  ["IFX","index","شاخص فرابورس",60700,0.42],
  ["EQL-W","index","شاخص هم‌وزن",2150000,0.55],
- ["فولاد","bourse","فولاد مبارکه اصفهان",0,0],
- ["فملی","bourse","ملی صنایع مس ایران",0,0],
- ["کگل","bourse","گل‌گهر",0,0],
- ["کچاد","bourse","چادرملو",0,0],
- ["کاما","bourse","باما",0,0],
- ["ومعادن","bourse","توسعه معادن و فلزات",0,0],
- ["شپنا","bourse","پالایش نفت اصفهان",0,0],
- ["شتران","bourse","پالایش نفت تهران",0,0],
- ["شبندر","bourse","پالایش نفت بندرعباس",0,0],
- ["شبریز","bourse","پالایش نفت تبریز",0,0],
- ["شپدیس","bourse","پتروشیمی پردیس",0,0],
- ["نوری","bourse","پتروشیمی نوری",0,0],
- ["شاراک","bourse","پتروشیمی شازند",0,0],
- ["مارون","bourse","پتروشیمی مارون",0,0],
- ["زاگرس","bourse","پتروشیمی زاگرس",0,0],
- ["شگویا","bourse","پتروشیمی تندگویان",0,0],
- ["پارسان","bourse","گسترش نفت و گاز پارسیان",0,0],
+ /* کلمات پرتکرار → خودرو */
  ["خودرو","bourse","ایران خودرو",0,0],
  ["خساپا","bourse","سایپا",0,0],
- ["خبهمن","bourse","گروه بهمن",0,0],
  ["خپارس","bourse","پارس خودرو",0,0],
- ["وخارزم","bourse","بانک خاورمیانه",0,0],
+ ["خبهمن","bourse","گروه بهمن",0,0],
+ ["خزامیا","bourse","زامیاد",0,0],
+ /* بانک */
  ["وبملت","bourse","بانک ملت",0,0],
  ["وتجارت","bourse","بانک تجارت",0,0],
  ["وبصادر","bourse","بانک صادرات",0,0],
  ["وپاسار","bourse","بانک پاسارگاد",0,0],
+ ["ونوین","bourse","بانک اقتصاد نوین",0,0],
  ["وبشهر","bourse","بانک شهر",0,0],
- ["وکار","bourse","بانک کارآفرین",0,0],
- ["وآیند","bourse","بانک آینده",0,0],
- ["رمپنا","bourse","گروه مپنا",0,0],
+ /* فولاد / فلز / مس / معدن */
+ ["فولاد","bourse","فولاد مبارکه اصفهان",0,0],
+ ["فخوز","bourse","فولاد خوزستان",0,0],
+ ["ذوب","bourse","ذوب آهن اصفهان",0,0],
+ ["فملی","bourse","ملی صنایع مس ایران",0,0],
+ ["کگل","bourse","گل‌گهر",0,0],
+ ["کچاد","bourse","چادرملو",0,0],
+ ["کاوه","bourse","فولاد کاوه جنوب",0,0],
+ /* پالایش / پالایشگاه */
+ ["شپنا","bourse","پالایش نفت اصفهان",0,0],
+ ["شبندر","bourse","پالایش نفت بندرعباس",0,0],
+ ["شتران","bourse","پالایش نفت تهران",0,0],
+ ["شبریز","bourse","پالایش نفت تبریز",0,0],
+ ["شسپا","bourse","نفت سپاهان",0,0],
+ /* سیمان */
+ ["سیتا","bourse","سرمایه‌گذاری سیمان تأمین",0,0],
+ ["سفارس","bourse","سیمان فارس و خوزستان",0,0],
+ ["سشرق","bourse","سیمان شرق",0,0],
+ ["سجنوب","bourse","سیمان داراب",0,0],
+ /* صندوق / هلدینگ */
+ ["وصندوق","bourse","سرمایه‌گذاری صندوق بازنشستگی",0,0],
+ ["شستا","bourse","سرمایه‌گذاری تأمین اجتماعی",0,0],
+ ["وغدیر","bourse","سرمایه‌گذاری غدیر",0,0],
+ ["تاپیکو","bourse","سرمایه‌گذاری نفت و گاز و پتروشیمی تأمین",0,0],
+ /* پتروشیمی / انرژی‌محور */
+ ["فارس","bourse","صنایع پتروشیمی خلیج فارس",0,0],
+ ["نوری","bourse","پتروشیمی نوری",0,0],
+ ["مارون","bourse","پتروشیمی مارون",0,0],
+ ["زاگرس","bourse","پتروشیمی زاگرس",0,0],
+ ["آریا","farabourse","پتروشیمی آریاساسول",0,0],
+ /* نان / غذا / مسکن */
+ ["غزر","bourse","صنعتی زر ماکارون",0,0],
+ ["غسالم","bourse","سالمین",0,0],
+ ["ثبهساز","bourse","بهساز کاشانه تهران",0,0],
+ ["ثشاهد","bourse","سرمایه‌گذاری شاهد",0,0],
+ /* مخابرات / بیمه (پرتکرار مکمل) */
  ["اخابر","bourse","مخابرات ایران",0,0],
  ["همراه","bourse","همراه اول",0,0],
- ["های وب","bourse","داده گستر عصر نوین",0,0],
- ["وغدیر","bourse","سرمایه‌گذاری غدیر",0,0],
- ["وصندوق","bourse","سرمایه‌گذاری صندوق بازنشستگی",0,0],
- ["وکادو","bourse","کادوس",0,0],
- ["دارو","bourse","داروسازی فارابی",0,0],
- ["دعبید","bourse","داروسازی عبیدی",0,0],
- ["برکت","bourse","گروه دارویی برکت",0,0],
- ["ثفارس","bourse","عمران و توسعه شاهد",0,0],
- ["ثشاهد","bourse","سرمایه‌گذاری شاهد",0,0],
  ["بپاس","farabourse","بیمه پاسارگاد",0,0],
- ["میدکو","farabourse","توسعه معادن و صنایع معدنی خاورمیانه",0,0],
- ["آریا","farabourse","پتروشیمی آریاساسول",0,0],
- ["وسپهر","farabourse","سرمایه‌گذاری مالی سپهرصادرات",0,0],
- ["تفاس","farabourse","توسعه فاوا عمومی",0,0],
- ["تفارس","farabourse","توسعه گردشگری ایران",0,0],
- ["زپارس","farabourse","زرین معدن پارسیان",0,0],
- ["غپینو","farabourse","پگاه اصفهان",0,0],
- ["ثباغ","farabourse","باغ بهشت",0,0],
- ["ثمین","farabourse","تأمین مسکن جوانان",0,0],
- ["آسیاتک","farabourse","آسیاتک",0,0],
- ["فصبا","farabourse","صبا تأمین",0,0],
- ["دی","farabourse","بیمه دی",0,0],
- ["وبصائر","farabourse","بیمه سینا",0,0],
+ /* صندوق‌های پرمعامله */
  ["دارا یکم","funds","واسطه‌گری مالی یکم",0,0],
  ["پالایش","funds","پالایشی یکم",0,0],
- ["آگاس","funds","طلای گنجینه",0,0],
- ["عیار","funds","صندوق طلای عیار",0,0],
- ["زر","funds","صندوق طلای زر",0,0],
- ["طلا","funds","صندوق طلا",0,0],
  ["اهرم","funds","اهرم",0,0],
- ["شتاب","funds","شتاب",0,0],
- ["توان","funds","توان",0,0],
- ["نارنج","funds","نارنج",0,0],
- ["اطلس","funds","طلای اطلس",0,0],
- ["لوتوس","funds","طلای لوتوس",0,0],
- ["کهربا","funds","کهربا",0,0],
- ["پارند","funds","پارند",0,0],
- ["فیروزه","funds","فیروزه",0,0],
- ["کاریس","funds","کاریس",0,0],
-
+ ["طلا","funds","صندوق طلا",0,0],
+ ["عیار","funds","صندوق طلای عیار",0,0],
+ ["آگاس","funds","طلای گنجینه",0,0],
+ /* انرژی / کالا */
  ["برق","energy","قرارداد برق بورس انرژی",0,0],
  ["گاز","energy","گاز طبیعی بورس انرژی",0,0],
- ["نفتا","energy","نفتا بورس انرژی",0,0],
- ["بنزین","energy","بنزین بورس انرژی",0,0],
- ["زعفران","commodity","زعفران بورس کالا",0,0],
- ["شمش","commodity","شمش طلا بورس کالا",0,0],
- ["سکه","commodity","سکه بورس کالا",0,0],
  ["سیمان","commodity","سیمان بورس کالا",0,0],
- ["میلگرد","commodity","میلگرد بورس کالا",0,0],
+ ["شمش","commodity","شمش طلا بورس کالا",0,0],
+ ["زعفران","commodity","زعفران بورس کالا",0,0],
+ /* رمزارز و فلزات جهانی */
  ["BTC","crypto","بیت‌کوین",0,0],
  ["ETH","crypto","اتریوم",0,0],
- ["SOL","crypto","سولانا",0,0],
- ["XRP","crypto","ریپل",0,0],
- ["BNB","crypto","بایننس‌کوین",0,0],
- ["DOGE","crypto","دوج‌کوین",0,0],
- ["ADA","crypto","کاردانو",0,0],
- ["TON","crypto","تون‌کوین",0,0],
- ["AVAX","crypto","آوالانچ",0,0],
- ["DOT","crypto","پولکادات",0,0],
- ["LINK","crypto","چین‌لینک",0,0],
- ["USDT","crypto","تتر",0,0],
  ["XAU","metal","انس طلا",2650.40,0.35],
  ["XAG","metal","انس نقره",31.20,-0.15],
  ["WTI","metal","نفت WTI",72.80,0.22]
 ];
 
 
+
+/* HMT Keyword map + trend helpers (صعود / رنج / نزول) */
+var HMT_KW_MAP={
+  'خودرو':'خودرو','خساپا':'خودرو','خپارس':'خودرو','خبهمن':'خودرو','خزامیا':'خودرو',
+  'وبملت':'بانک','وتجارت':'بانک','وبصادر':'بانک','وپاسار':'بانک','ونوین':'بانک','وبشهر':'بانک',
+  'فولاد':'فولاد','فخوز':'فولاد','ذوب':'فولاد','فملی':'مس','کگل':'معدن','کچاد':'معدن','کاوه':'فولاد',
+  'شپنا':'پالایش','شبندر':'پالایش','شتران':'پالایش','شبریز':'پالایش','شسپا':'پالایش',
+  'سیتا':'سیمان','سفارس':'سیمان','سشرق':'سیمان','سجنوب':'سیمان',
+  'وصندوق':'صندوق','شستا':'صندوق','وغدیر':'سرمایه‌گذاری','تاپیکو':'سرمایه‌گذاری',
+  'فارس':'پتروشیمی','نوری':'پتروشیمی','مارون':'پتروشیمی','زاگرس':'پتروشیمی','آریا':'پتروشیمی',
+  'غزر':'نان/غذا','غسالم':'نان/غذا','ثبهساز':'مسکن','ثشاهد':'مسکن',
+  'اخابر':'مخابرات','همراه':'مخابرات','بپاس':'بیمه',
+  'دارا یکم':'صندوق','پالایش':'صندوق','اهرم':'صندوق','طلا':'طلا','عیار':'طلا','آگاس':'طلا',
+  'TEDPIX':'شاخص','IFX':'شاخص','EQL-W':'شاخص'
+};
+function hmtTrend(chg){
+  chg=Number(chg)||0;
+  if(chg>0.35) return {key:'up',fa:'صعود',en:'UP',color:'var(--success)'};
+  if(chg<-0.35) return {key:'dn',fa:'نزول',en:'DOWN',color:'var(--danger)'};
+  return {key:'flat',fa:'رنج',en:'RANGE',color:'var(--gold)'};
+}
+function hmtKw(sym){ return (typeof HMT_KW_MAP!=='undefined' && HMT_KW_MAP[sym]) ? HMT_KW_MAP[sym] : ''; }
+
 (function seedLastPrints(){
   try{
+    /* آخرین قیمت / آخرین تغییر نشست ( شده — تا قبل از دریافت زنده صفر نمایش داده نشود */
     var snap={
-      'فولاد':4250,'فملی':7800,'کگل':3800,'کچاد':3200,'کاما':2100,'ومعادن':1500,
-      'شپنا':6200,'شتران':6400,'شبندر':14000,'شبریز':11000,'خودرو':650,'خساپا':570,
-      'وبملت':1410,'وتجارت':900,'وبصادر':940,'رمپنا':12000,'فارس':8500,
-      'دارا یکم':220000,'اهرم':18000,'اطلس':178000,'طلا':45000,'عیار':120000,
-      'آریا':150000,'زاگرس':180000,'مارون':220000,'تاپیکو':47000,'وغدیر':21000
+      'فولاد':[4250,-1.12],'فخوز':[1750,0.85],'ذوب':[980,-0.64],'فملی':[26890,-2.85],'کگل':[2332,2.06],'کچاد':[2705,2.82],'کاوه':[4250,2.86],
+      'شپنا':[12030,-2.98],'شتران':[5980,-2.92],'شبندر':[5468,1.92],'شبریز':[11000,0.75],'شسپا':[9000,-0.40],
+      'خودرو':[605,2.72],'خساپا':[553,-2.47],'خپارس':[809,2.80],'خبهمن':[2100,1.15],'خزامیا':[1200,-0.55],
+      'وبملت':[1346,-2.39],'وتجارت':[526,2.94],'وبصادر':[598,2.41],'وپاسار':[5125,-1.49],'ونوین':[3340,0.91],'وبشهر':[2700,0.40],
+      'سیتا':[17150,0.35],'سفارس':[4500,-0.80],'سشرق':[2800,1.20],'سجنوب':[3100,-0.30],
+      'وصندوق':[16430,0.60],'شستا':[1600,-1.10],'وغدیر':[21000,0.95],'تاپیکو':[18750,2.85],
+      'فارس':[10160,2.83],'نوری':[44000,1.40],'مارون':[55290,2.60],'زاگرس':[180000,0.90],'آریا':[150000,1.10],
+      'غزر':[2458,0.70],'غسالم':[3200,-0.25],'ثبهساز':[2579,2.83],'ثشاهد':[1800,0.50],
+      'اخابر':[519,2.77],'همراه':[3400,-0.90],'بپاس':[12000,0.45],
+      'دارا یکم':[220000,0.80],'اهرم':[18000,-1.50],'طلا':[45000,0.35],'عیار':[120000,0.22],'آگاس':[90000,0.18],'پالایش':[110000,-0.70],
+      'TEDPIX':[8333000,0.85],'IFX':[60700,0.42],'EQL-W':[2150000,0.55]
     };
     if(typeof SYMS==='undefined')return;
+    // restore persisted last good quotes
+    var saved={};
+    try{ saved=JSON.parse(localStorage.getItem('hmt-last-quotes')||'{}')||{}; }catch(e){}
     SYMS.forEach(function(s){
-      if((!s[3]||s[3]===0) && snap[s[0]]){ s[3]=snap[s[0]]; s[4]=s[4]||0; s.live=false; }
+      var k=s[0];
+      if(saved[k] && saved[k].p>0){
+        s[3]=saved[k].p;
+        if(typeof saved[k].c==='number') s[4]=saved[k].c;
+        s.close=saved[k].close||s[3];
+        s.asOf=saved[k].t||0;
+        s.live=!!saved[k].live;
+        return;
+      }
+      if(snap[k]){
+        if(!s[3]||s[3]===0) s[3]=snap[k][0];
+        if(s[4]===0 || s[4]===undefined || s[4]===null) s[4]=snap[k][1];
+        s.close=s[3];
+        s.live=false;
+      }
     });
   }catch(e){}
 })();
@@ -1914,13 +2289,16 @@ function chgClass(c){return c>0?'up':(c<0?'dn':'')}
 /* ── clock / poem / ticker ── */
 function tickClock(){
  try{
-  var t=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Tehran',hourCycle:'h23',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(new Date());
-  var d=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:'Asia/Tehran',dateStyle:'full'}).format(new Date());
-  if($('clockBox'))$('clockBox').textContent=t+' Tehran';
-  if($('dateBox'))$('dateBox').textContent=d;
-  if($('clkTehran'))$('clkTehran').textContent='Tehran '+t;
-  var i=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Istanbul',hourCycle:'h23',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(new Date());
-  if($('clkIstanbul'))$('clkIstanbul').textContent='Istanbul '+i;
+  var now=new Date();
+  var tTeh=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Tehran',hourCycle:'h23',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(now);
+  var dTeh=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:'Asia/Tehran',weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(now);
+  var tIst=new Intl.DateTimeFormat('tr-TR',{timeZone:'Europe/Istanbul',hourCycle:'h23',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(now);
+  var dIst=new Intl.DateTimeFormat('tr-TR',{timeZone:'Europe/Istanbul',weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(now);
+  if($('clkTehran'))$('clkTehran').textContent=tTeh;
+  if($('dateBox'))$('dateBox').textContent=dTeh;
+  if($('clkIstanbul'))$('clkIstanbul').textContent=tIst;
+  if($('dateIstanbul'))$('dateIstanbul').textContent=dIst;
+  if($('clockBox'))$('clockBox').textContent=tTeh+' تهران';
  }catch(e){}
 }
 var POEMS=[
@@ -2027,7 +2405,35 @@ function viaProxy(url){
  return next();
 }
 function getJSON(url){return pull(url).catch(function(){return viaProxy(url)})}
-function setLive(sym,price,chg){SYMS.forEach(function(s){if(s[0]===sym){if(price)s[3]=price;if(chg!==undefined&&chg!==null)s[4]=Number(chg);s.live=true}});renderMarkets();buildTicker();renderIdx()}
+function setLive(sym,price,chg,extra){
+  extra=extra||{};
+  SYMS.forEach(function(s){
+    if(s[0]!==sym) return;
+    if(price && Number(price)>0) s[3]=Number(price);
+    // فقط وقتی تغییر واقعاً عدد معتبر است بنویس — صفرِ API را روی آخرین غیرصفر ننویس مگر صریحاً آمده باشد
+    if(chg!==undefined && chg!==null && !isNaN(Number(chg))){
+      if(!(Number(chg)===0 && Math.abs(Number(s[4])||0)>0.01 && extra.allowZero===false)){
+        s[4]=Number(chg);
+      }
+    }
+    if(extra.close && Number(extra.close)>0) s.close=Number(extra.close);
+    else if(price && Number(price)>0 && !s.close) s.close=Number(price);
+    if(extra.yest) s.yest=Number(extra.yest);
+    s.asOf=Date.now();
+    s.live=true;
+  });
+  try{
+    var bag=JSON.parse(localStorage.getItem('hmt-last-quotes')||'{}')||{};
+    var row=SYMS.filter(function(x){return x[0]===sym})[0];
+    if(row && row[3]>0){
+      bag[sym]={p:row[3],c:Number(row[4])||0,close:row.close||row[3],t:row.asOf||Date.now(),live:true};
+      localStorage.setItem('hmt-last-quotes', JSON.stringify(bag));
+    }
+  }catch(e){}
+  try{ if(typeof buildTicker==='function') buildTicker(); }catch(e){}
+  try{ if(typeof renderIdx==='function') renderIdx(); }catch(e){}
+  // renderMarkets را هر بار صدا نزن — از رفرش گروهی کنترل می‌شود تا چشمک نزند
+}
 
 function loadIndices(){
  var endpoints=[
@@ -2259,11 +2665,21 @@ function searchAndLoadTse(r){
   });
 }
 function fillStats(sym,price,chg){
+ chg=Number(chg)||0; price=Number(price)||0;
+ try{ setLive(sym, price||undefined, chg); }catch(e){}
  var live=(SYMS.filter(function(x){return x[0]===sym})[0]||{}).live;
- var src=CG_IDS[sym]?'CoinGecko':'TSETMC';
- $('mStats').innerHTML='<div class="ms-cell"><b>'+fmt(price)+'</b><span>'+(sym==='XAU'||sym==='XAG'||sym==='WTI'||CG_IDS[sym]?'USD':'ریال')+' · آخرین</span></div>'+
-  '<div class="ms-cell"><b style="color:'+(chg>0?'var(--success)':chg<0?'var(--danger)':'var(--text)')+';direction:ltr;unicode-bidi:isolate">'+(chg>0?'+':'')+chg+'%</b><span>تغییر</span></div>'+
-  '<div class="ms-cell"><b>'+(live?src+' · زنده':'اسنپ‌شات')+'</b><span>منبع/وضعیت</span></div>';
+ var src=(typeof CG_IDS!=='undefined'&&CG_IDS[sym])?'CoinGecko':'TSETMC';
+ var tr=hmtTrend(chg);
+ var unit=(sym==='XAU'||sym==='XAG'||sym==='WTI'||(typeof CG_IDS!=='undefined'&&CG_IDS[sym]))?'USD':'ریال';
+ var kw=hmtKw(sym);
+ $('mStats').innerHTML=
+  '<div class="ms-cell"><b>'+fmt(price)+'</b><span>'+unit+' · آخرین</span></div>'+
+  '<div class="ms-cell"><b style="color:'+tr.color+';direction:ltr;unicode-bidi:isolate">'+(chg>0?'+':'')+Number(chg).toFixed(2)+'%</b><span>تغییر · '+tr.fa+'</span></div>'+
+  '<div class="ms-cell"><b style="color:'+tr.color+'">'+tr.fa+'</b><span>'+(live?src+' · زنده':'اسنپ‌شات')+(kw?' · '+kw:'')+'</span></div>';
+ try{
+   var cs=$('capStatus');
+   if(cs){ cs.className='cap-status '+tr.key; cs.textContent=tr.fa+' / '+(live?'زنده':'آخرین داده'); }
+ }catch(e){}
 }
 function loadCryptoModal(sym){
  var id=CG_IDS[sym];
@@ -2281,32 +2697,62 @@ function loadCryptoModal(sym){
 }
 function loadTseModal(r){
  var code=r.insCode;
+ function parseRows(d){
+  var realOHLC=false;
+  var src=Array.isArray(d)?d:(d&&(d.chartData||d.history||d.closingPriceDaily||d.closingPriceDailyList)||[]);
+  if(!Array.isArray(src)) src=[];
+  var rows=src.map(function(e){
+   var t=Number(e.x||e.d||e.date||e.dEven||0);
+   var c=Number(e.pDrCotVal!==undefined?e.pDrCotVal:(e.pClosing!==undefined?e.pClosing:(e.close!==undefined?e.close:(e.c!==undefined?e.c:0))));
+   var o=e.priceFirst!==undefined?Number(e.priceFirst):(e.o!==undefined?Number(e.o):(e.priceYesterday!==undefined?Number(e.priceYesterday):null));
+   var h=e.priceMax!==undefined?Number(e.priceMax):(e.priceHigh!==undefined?Number(e.priceHigh):(e.h!==undefined?Number(e.h):null));
+   var l=e.priceMin!==undefined?Number(e.priceMin):(e.priceLow!==undefined?Number(e.priceLow):(e.l!==undefined?Number(e.l):null));
+   if(o!==null&&h!==null&&l!==null&&!isNaN(o)&&!isNaN(h)&&!isNaN(l)) realOHLC=true;
+   return{t:t,o:(o!==null&&!isNaN(o))?o:c,h:(h!==null&&!isNaN(h))?h:c,l:(l!==null&&!isNaN(l))?l:c,c:c};
+  }).filter(function(x){return x.c>0});
+  rows.sort(function(a,b){return a.t-b.t});
+  return {rows:rows, realOHLC:realOHLC};
+ }
+ function paint(rows, realOHLC, label){
+  if(!rows||rows.length<2){
+   drawNoData($('mChart').getContext('2d'),'داده کافی برای کندل نیست — از TSETMC باز کنید');
+   $('mSrc').textContent='tsetmc partial · InsCode '+code;
+   return;
+  }
+  var last=rows[rows.length-1], first=rows[0];
+  var chgPct = first.c ? ((last.c-first.c)/first.c*100) : 0;
+  fillStats(r.sym,last.c,chgPct);
+  if(realOHLC) drawCandles($('mChart').getContext('2d'),rows);
+  else drawLine($('mChart').getContext('2d'),rows);
+  var tr=hmtTrend(chgPct);
+  $('mSrc').textContent='source: cdn.tsetmc.com · '+(realOHLC?'daily OHLC candles':'daily line')+' · '+tr.fa+' · '+label+' · InsCode '+code;
+ }
  getJSON('https://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceInfo/'+code).then(function(info){
   var cp=(info&&info.closingPriceInfo)||info||{};
-  var price=Number(cp.lastPrice||cp.pDrCotVal||0),chg=Number(cp.priceChangePercent||cp.xVarIdxJRfV||0);
-  if(price)fillStats(r.sym,price,chg);
+  var price=Number(cp.lastPrice||cp.pDrCotVal||cp.pClosing||0);
+  var chg=Number(cp.priceChangePercent||cp.priceChange||cp.xVarIdxJRfV||0);
+  if(price) fillStats(r.sym,price,chg);
  }).catch(function(){});
+ // Chart: primary + fallback daily list
  getJSON('https://cdn.tsetmc.com/api/ClosingPrice/GetChartData/'+code+'/D').then(function(d){
-  var realOHLC=false;
-  var rows=(Array.isArray(d)?d:(d.chartData||d.history||[])).map(function(e){
-   var t=Number(e.x||e.d||e.date||0);
-   var c=Number(e.pDrCotVal!==undefined?e.pDrCotVal:(e.close!==undefined?e.close:(e.c!==undefined?e.c:0)));
-   var o=e.priceFirst!==undefined?Number(e.priceFirst):(e.o!==undefined?Number(e.o):null);
-   var h=e.priceHigh!==undefined?Number(e.priceHigh):(e.h!==undefined?Number(e.h):null);
-   var l=e.priceLow!==undefined?Number(e.priceLow):(e.l!==undefined?Number(e.l):null);
-   if(o!==null&&h!==null&&l!==null)realOHLC=true;
-   return{t:t,o:o!==null?o:c,h:h!==null?h:c,l:l!==null?l:c,c:c};
-  }).filter(function(x){return x.t&&x.c});
-  if(!rows.length)throw 0;
-  rows.sort(function(a,b){return a.t-b.t});
-  var last=rows[rows.length-1];
-  if(last.c)fillStats(r.sym,last.c,((rows[rows.length-1].c-rows[0].c)/rows[0].c*100));
-  if(realOHLC)drawCandles($('mChart').getContext('2d'),rows);
-  else{drawLine($('mChart').getContext('2d'),rows);}
-  $('mSrc').textContent='source: cdn.tsetmc.com · '+(realOHLC?'daily OHLC':'daily close (line)')+' · InsCode '+code;
+  var p=parseRows(d);
+  if(p.rows.length>=2){ paint(p.rows,p.realOHLC,'GetChartData'); return; }
+  throw 0;
  }).catch(function(){
-  drawNoData($('mChart').getContext('2d'),'دادهٔ زندهٔ TSETMC در دسترس نبود (شبکه/CORS) — در ایران معمولاً مستقیم یا با پراکسی بارگیری می‌شود');
-  $('mSrc').textContent='tsetmc unreachable';
+  return getJSON('https://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceDailyList/'+code+'/0').then(function(d){
+   var p=parseRows(d);
+   paint(p.rows,p.realOHLC,'DailyList');
+  });
+ }).catch(function(){
+  var local=SYMS.filter(function(s){return s[0]===r.sym})[0];
+  if(local&&local[3]){
+   fillStats(r.sym,local[3],local[4]||0);
+   drawSparkFromLocal($('mChart').getContext('2d'), r.sym, local[3], local[4]||0);
+   $('mSrc').textContent='fallback snapshot · CORS/network — لینک TSETMC را باز کنید';
+  } else {
+   drawNoData($('mChart').getContext('2d'),'دادهٔ زندهٔ TSETMC در دسترس نبود (شبکه/CORS)');
+   $('mSrc').textContent='tsetmc unreachable';
+  }
  });
 }
 function drawLine(ctx,rows){
@@ -2352,14 +2798,39 @@ function drawCandles(ctx,rows){
   var yo=y(r.o),yc=y(r.c);
   ctx.fillRect(x-bw/2,Math.min(yo,yc),bw,Math.max(1,Math.abs(yc-yo)));
  });
- /* last price line */
- var last=rows[n-1];ctx.strokeStyle='#f0b429';ctx.setLineDash([4,3]);
+ /* last price line + trend badge */
+ var last=rows[n-1], first=rows[0];
+ ctx.strokeStyle='#f0b429';ctx.setLineDash([4,3]);
  ctx.beginPath();ctx.moveTo(0,y(last.c));ctx.lineTo(W,y(last.c));ctx.stroke();ctx.setLineDash([]);
- ctx.fillStyle='#f0b429';ctx.fillText(fmt(last.c),W-60,y(last.c)-5);
+ ctx.fillStyle='#f0b429';ctx.font='12px monospace';ctx.textAlign='left';
+ ctx.fillText(fmt(last.c),W-70,y(last.c)-6);
+ var chgPct=first.c?((last.c-first.c)/first.c*100):0;
+ var tr=hmtTrend(chgPct);
+ ctx.fillStyle=tr.key==='up'?'#2ed573':(tr.key==='dn'?'#ff4757':'#f0b429');
+ ctx.font='bold 14px Vazirmatn,Tahoma';ctx.textAlign='right';
+ ctx.fillText(tr.fa+'  '+(chgPct>0?'+':'')+chgPct.toFixed(2)+'%', W-12, 22);
+ ctx.textAlign='start';
 }
 
 /* ── markets view ── */
 var curGroup='bourse';
+function renderKwBoard(){
+  var board=$('kwBoard'); if(!board) return;
+  board.innerHTML='';
+  var priority=['خودرو','خساپا','فولاد','وبملت','شپنا','سیتا','وصندوق','فارس','فملی','وتجارت','شبندر','شستا','خپارس','غزر','ثبهساز','وپاسار','کگل','شتران','وغدیر','ونوین','فخوز','ذوب','سفارس','سشرق','اخابر','دارا یکم','اهرم','طلا'];
+  var by={}; SYMS.forEach(function(s){ by[s[0]]=s; });
+  priority.forEach(function(sym){
+    var row=by[sym]; if(!row) return;
+    var chg=Number(row[4])||0, tr=hmtTrend(chg), kw=hmtKw(sym)||row[1];
+    var btn=document.createElement('button'); btn.type='button'; btn.className='rq-card';
+    btn.innerHTML='<span class="rq-kw">'+kw+'</span><span class="rq-sym">'+sym+'</span><span class="rq-name">'+row[2]+'</span>'+
+      '<span class="rq-meta"><b class="chg" style="color:'+tr.color+'">'+tr.fa+' '+(chg?(chg>0?'+':'')+chg.toFixed(2)+'%':'—')+'</b>'+(row.live?'<i class="rq-live">زنده</i>':'<i class="rq-snap">پایش</i>')+'</span>';
+    btn.addEventListener('click',function(){
+      selectSymbol({sym:sym,name:row[2],kind:row[1]});
+    });
+    board.appendChild(btn);
+  });
+}
 function renderMarkets(){
  var grid=$('symGrid');if(!grid)return;
  var cs=customSymbols();var rows=[];
@@ -2407,31 +2878,51 @@ function renderMarkets(){
   $('gDesc').innerHTML=(gi&&gi.desc?gi.desc:'')+' <a href="'+ref+'" target="_blank" rel="noopener" style="color:var(--neon)">'+rtlbl+'</a>';
  }
  grid.innerHTML='';
+ // enrich from SYMS master
+ rows=rows.map(function(r){
+   var m=SYMS.filter(function(s){return s[0]===r.sym})[0];
+   if(m){ r.price=m[3]; r.chg=m[4]; r.live=m.live; r.close=m.close||m[3]; r.asOf=m.asOf; }
+   return r;
+ });
  rows.forEach(function(r){
-  var d=document.createElement('div');
-  var chg=r.chg||0;var cls=chg>0?'positive':(chg<0?'negative':'');
-  d.className='sym-row '+cls;
-  d.innerHTML='<div class="si"><b>'+r.sym+'</b><span>'+r.name+'</span></div><div class="sm"><span class="p">'+fmt(r.price)+'</span><span class="c">'+(r.live?'<span style="color:var(--success)">● زنده</span> · ':'')+(chg?(chg>0?'+':'')+chg+'%':'—')+'</span></div>';
-  d.addEventListener('click',function(){
+  var chg=Number(r.chg); if(isNaN(chg)) chg=0;
+  var tr=hmtTrend(chg);
+  var kw=hmtKw(r.sym)||'—';
+  var close=r.close!=null?r.close:r.price;
+  var trEl=document.createElement('tr');
+  trEl.innerHTML=
+    '<td><span class="sym">'+r.sym+'</span><div style="font-size:9px;color:var(--dim)">'+r.name+'</div></td>'+
+    '<td><span class="kw">'+kw+'</span></td>'+
+    '<td class="num">'+fmt(r.price)+'</td>'+
+    '<td class="num">'+fmt(close)+'</td>'+
+    '<td class="num '+(tr.key==='up'?'c-up':tr.key==='dn'?'c-dn':'c-fl')+'">'+(chg>0?'+':'')+Number(chg).toFixed(2)+'٪</td>'+
+    '<td class="'+(tr.key==='up'?'c-up':tr.key==='dn'?'c-dn':'c-fl')+'">'+tr.fa+'</td>'+
+    '<td style="font-size:9px">'+(r.live?'<span class="c-up">● زنده</span>':'آخرین ثبت')+'</td>';
+  trEl.addEventListener('click',function(){
    if(r.cat){
      var link=r.ref||(r.kind==='energy'?'https://www.irenex.ir/':'https://www.ime.co.ir/');
-     $('mTitle').textContent=r.sym+' — '+(KIND_LABEL[r.kind]||'');
-     $('mStats').innerHTML='';
-     $('mDesc').textContent=r.name+' — برای دادهٔ رسمی وارد سایت مرجع شوید.';
-     $('modal').classList.add('open');document.body.style.overflow='hidden';
-     drawNoData($('mChart').getContext('2d'),'API عمومی محدود — از لینک مرجع استفاده کنید');
-     $('mSrc').textContent='مرجع رسمی';
-     if($('mTse')) $('mTse').href=link;
-     if($('mIfb')) $('mIfb').href=link;
+     window.open(link,'_blank','noopener');
    } else {
      selectSymbol({sym:r.sym,name:r.name,kind:r.kind});
    }
   });
-  grid.appendChild(d);
+  grid.appendChild(trEl);
  });
  var st=$('gStatus');
- if(st){st.textContent=(curGroup==='energy'||curGroup==='commodity')?'دستهٔ آموزشی · لینک مرجع':(navigator.onLine?'در تلاش برای دادهٔ زنده…':'آفلاین — اسنپ‌شات')}
- /* gDesc از ابتدای renderMarkets با لینک TSETMC تنظیم شده */
+ var openMkt=false;
+ try{ openMkt=(typeof isMarketLikelyOpen==='function')?isMarketLikelyOpen():false; }catch(e){}
+ if(st){
+   if(curGroup==='energy'||curGroup==='commodity') st.textContent='دسته · مرجع رسمی';
+   else if(!navigator.onLine) st.textContent='آفلاین · آخرین دادهٔ ذخیره‌شده';
+   else st.textContent=openMkt?'پایش زنده…':'بازار بسته · آخرین دادهٔ ثبت‌شده';
+ }
+ try{
+   var asof=$('gAsOf'), ms=$('gMktState');
+   var newest=0; SYMS.forEach(function(s){ if(s.asOf&&s.asOf>newest) newest=s.asOf; });
+   if(asof) asof.textContent='آخرین بروزرسانی HMT: '+(newest?new Date(newest).toLocaleString('fa-IR',{hour:'2-digit',minute:'2-digit'}):'اسنپ‌شات نشست قبل');
+   if(ms) ms.textContent=openMkt?'وضعیت: ساعت معاملات':'وضعیت: خارج از ساعت · نمایش آخرین ثبت';
+ }catch(e){}
+
 }
 function renderIdx(){
  var g=$('idxGrid');if(!g)return;g.innerHTML='';
@@ -2445,27 +2936,8 @@ function renderIdx(){
   d.addEventListener('click',function(){selectSymbol({sym:s,name:row[2],kind:row[1]})});
   g.appendChild(d);
  });
- var q=$('radarQuick');if(q){q.innerHTML='';
-  [{g:'bourse',t:'بورس تهران'},{g:'farabourse',t:'فرابورس'},{g:'funds',t:'صندوق'},{g:'energy',t:'انرژی'},{g:'commodity',t:'کالا'},{g:'crypto',t:'رمزارز و فلزات'}].forEach(function(x){
-   var cs=typeof customSymbols==='function'?customSymbols():{};
-   var cnt=SYMS.filter(function(s){return s[1]===x.g}).length;
-   Object.keys(cs).forEach(function(k){ if(cs[k].kind===x.g) cnt++; });
-   if(x.g==='crypto'){
-     cnt=SYMS.filter(function(s){return s[1]==='crypto'||s[1]==='metal'}).length;
-     Object.keys(cs).forEach(function(k){ if(cs[k].kind==='crypto'||cs[k].kind==='metal') cnt++; });
-   }
-   if(x.g==='energy' && typeof ENERGY_CATS!=='undefined') cnt=Math.max(cnt, ENERGY_CATS.length + SYMS.filter(function(s){return s[1]==='energy'}).length);
-   if(x.g==='commodity' && typeof COMM_CATS!=='undefined') cnt=Math.max(cnt, COMM_CATS.length + SYMS.filter(function(s){return s[1]==='commodity'}).length);
-   var b=document.createElement('button');b.className='card-link';
-   b.textContent=x.t+' ('+cnt+')';
-   b.addEventListener('click',function(){
-    curGroup=x.g;
-    document.querySelectorAll('#gtabs .gtab').forEach(function(t){t.classList.toggle('on',t.dataset.g===x.g)});
-    showView('view-markets');renderMarkets();
-   });
-   q.appendChild(b);
-  });
- }
+ var q=$('radarQuick'); if(q){ q.innerHTML=''; q.style.display='none'; }
+ if(typeof renderKwBoard==='function') try{ renderKwBoard(); }catch(e){}
 }
 function renderChannels(){
  var g=$('chList');if(!g)return;g.innerHTML='';
@@ -2555,6 +3027,7 @@ function showView(id){
  document.querySelectorAll('.view-panel').forEach(function(p){p.classList.toggle('active',p.id===id)});
  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});
  if((id==='view-markets'||id==='view-groups') && typeof renderMarkets==='function') try{renderMarkets()}catch(e){}
+ if(id==='view-groups' && typeof renderKwBoard==='function') try{renderKwBoard()}catch(e){}
  if(id==='view-groups' && typeof loadFullMarketGroup==='function') try{loadFullMarketGroup(typeof curGroup!=='undefined'?curGroup:'bourse')}catch(e){}
  if(id==='view-radar' && typeof renderIdx==='function') try{renderIdx()}catch(e){}
  try{tickClock()}catch(e){}
@@ -4094,26 +4567,45 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     }).catch(function(){});
   }
 
+  function parseClosingInfo(cp){
+    cp=cp||{};
+    var last=Number(cp.pDrCotVal||cp.lastPrice||cp.last||0);
+    var close=Number(cp.pClosing||cp.pClosingPrice||last||0);
+    var yest=Number(cp.priceYesterday||cp.priceYesterdayFinal||0);
+    var chg=Number(cp.priceChangePercent||cp.yVar||cp.xVarIdxJRfV||NaN);
+    if(isNaN(chg)){
+      var absChg=Number(cp.priceChange||cp.priceChangeValue||0);
+      if(yest>0 && absChg) chg=(absChg/yest)*100;
+      else if(yest>0 && last>0) chg=((last-yest)/yest)*100;
+      else if(yest>0 && close>0) chg=((close-yest)/yest)*100;
+      else chg=0;
+    }
+    var price=last>0?last:(close>0?close:0);
+    return {price:price, close:close||price, yest:yest, chg:Number(chg.toFixed?chg.toFixed(2):chg)};
+  }
   function resolveAndQuote(sym, name){
     return fetchJSON('https://cdn.tsetmc.com/api/Instrument/GetInstrumentSearch/'+encodeURIComponent(sym)).then(function(d){
       var rows=(d&&d.instrumentSearch)||[];
       if(!rows.length) throw 0;
       var row=rows[0];
       for(var i=0;i<rows.length;i++){
-        var s=String(rows[i].lVal18AFC||'').trim();
-        if(s===sym){ row=rows[i]; break; }
+        var s=String(rows[i].lVal18AFC||rows[i].lVal30||'').trim();
+        if(s===sym || String(rows[i].lVal30||'').indexOf(sym)===0){ row=rows[i]; break; }
       }
       var code=String(row.insCode||'');
       return fetchJSON('https://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceInfo/'+code).then(function(info){
         var cp=(info&&info.closingPriceInfo)||info||{};
-        var price=Number(cp.pDrCotVal||cp.lastPrice||cp.pClosing||0);
-        var chg=Number(cp.priceChangePercent||0);
-        if(!chg && cp.priceChange && cp.priceYesterday) chg=(Number(cp.priceChange)/Number(cp.priceYesterday))*100;
-        if(price) setP(sym, price, chg);
-        return {code:code, price:price, chg:chg, cp:cp};
+        var q=parseClosingInfo(cp);
+        if(q.price){
+          if(typeof setP==='function') setP(sym, q.price, q.chg);
+          if(typeof setLive==='function') setLive(sym, q.price, q.chg, {close:q.close, yest:q.yest, allowZero:true});
+        }
+        return {code:code, price:q.price, chg:q.chg, close:q.close, yest:q.yest, cp:cp};
       });
     });
   }
+  window.resolveAndQuote=resolveAndQuote;
+  window.parseClosingInfo=parseClosingInfo;
 
   // Override openModal for live path
   function patchModal(){
@@ -5348,11 +5840,10 @@ var HMT_LEGACY_DEFAULTS = {"portfolio": "data:image/jpeg;base64,/9j/4AAQSkZJRgAB
         var code = String(row.insCode||'');
         var info = await fetch('https://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceInfo/'+code).then(function(r){return r.json()});
         var cp = (info && info.closingPriceInfo) || info || {};
-        var price = Number(cp.pDrCotVal||cp.lastPrice||cp.pClosing||0);
-        var chg = Number(cp.priceChangePercent||0);
-        if(!chg && cp.priceChange && cp.priceYesterday) chg = (Number(cp.priceChange)/Number(cp.priceYesterday))*100;
-        if(price && typeof setP==='function') setP(sym, price, chg);
-        quoteCache[sym] = {t:now, price:price, chg:chg};
+        var q = (typeof parseClosingInfo==='function') ? parseClosingInfo(cp) : {price:Number(cp.pDrCotVal||cp.pClosing||0), chg:Number(cp.priceChangePercent||0), close:Number(cp.pClosing||0)};
+        if(q.price && typeof setP==='function') setP(sym, q.price, q.chg);
+        if(q.price && typeof setLive==='function') setLive(sym, q.price, q.chg, {close:q.close, yest:q.yest, allowZero:true});
+        quoteCache[sym] = {t:now, price:q.price, chg:q.chg, close:q.close};
         return quoteCache[sym];
       }
     }catch(e){ return null; }
@@ -5462,8 +5953,9 @@ var HMT_LEGACY_DEFAULTS = {"portfolio": "data:image/jpeg;base64,/9j/4AAQSkZJRgAB
 
 
 
-/* ═══ HMT LANGUAGE ENGINE v3 (clean) ═══ */
+/* ═══ HMT LANGUAGE ENGINE v4 ═══ */
 (function(){
+  var POEM_FA = null;
   function applyLang(lang){
     lang = (lang==='en') ? 'en' : 'fa';
     document.documentElement.lang = lang;
@@ -5473,54 +5965,42 @@ var HMT_LEGACY_DEFAULTS = {"portfolio": "data:image/jpeg;base64,/9j/4AAQSkZJRgAB
     if(!window.settings) window.settings = {};
     settings.lang = lang;
 
-    // Nav: only .nav-short with data-fa / data-en
     document.querySelectorAll('.nav-short[data-fa]').forEach(function(sp){
       sp.textContent = (lang==='en' ? (sp.getAttribute('data-en')||sp.getAttribute('data-fa')) : sp.getAttribute('data-fa'));
     });
-
-    // Elements with data-i18n-fa / data-i18n-en
     document.querySelectorAll('[data-i18n-fa]').forEach(function(el){
       el.textContent = lang==='en' ? (el.getAttribute('data-i18n-en')||el.getAttribute('data-i18n-fa')) : el.getAttribute('data-i18n-fa');
     });
 
-    // Group tabs
     document.querySelectorAll('#gtabs .gtab').forEach(function(tb){
       if(!tb.getAttribute('data-fa')) tb.setAttribute('data-fa', tb.textContent.trim());
       var map={bourse:['بورس تهران','TSE'],farabourse:['فرابورس','IFB'],funds:['صندوق','Funds'],energy:['انرژی','Energy'],commodity:['کالا','Commodity'],crypto:['رمزارز','Crypto']};
       var g=tb.getAttribute('data-g');
       if(map[g]) tb.textContent = lang==='en' ? map[g][1] : map[g][0];
-      else tb.textContent = lang==='en' ? (tb.getAttribute('data-en')||tb.getAttribute('data-fa')) : tb.getAttribute('data-fa');
-    });
-    document.querySelectorAll('#idxTabs .gtab').forEach(function(tb){
-      if(!tb.getAttribute('data-fa')) tb.setAttribute('data-fa', tb.textContent.trim());
-      var map={bourse_funds:['بورس + صندوق','TSE + Funds'],bourse:['بورس + صندوق','TSE + Funds'],farabourse:['فرابورس','IFB'],funds:['بورس + صندوق','TSE + Funds'],commodity:['کالا','Commodity'],energy:['انرژی','Energy'],crypto:['رمزارز','Crypto'],global:['رمزارز','Crypto']};
-      var g=tb.getAttribute('data-idxset');
-      if(map[g]) tb.textContent = lang==='en' ? map[g][1] : map[g][0];
     });
 
-    // Heroes: data-i18n keys already on some
     var heroes = {
       fa: {
-        'view-radar':['HMT12856 — MARKET RADAR','مرکز عملیاتی بازارهای سرمایه پذیر','پدرام همتی (حاج اسماعیل)'],
-        'view-markets':['HMT12856 — ناخدا پدرام','ناخدا پدرام','شاخص‌های زنده · آمپر بازار'],
-        'view-groups':['HMT12856 — MARKET GROUPS','گروه‌های بازار سرمایه','جستجو و تابلوی نمادها'],
-        'view-channels':['HMT12856 — NETWORK','کانال‌های مالک','مسیرهای ارتباطی'],
-        'view-portfolio':['HMT12856 — پرتفوی','سبدگردانی و نوسان‌گیری','سبد شخصی · کارگزاری مفید'],
-        'view-legacy':['HMT12856 — LINEAGE','میراث همتی','فرشتگان زمینی'],
-        'view-articles':['HMT12856 — ARTICLES','مقالات','نوشته‌های مالک'],
-        'view-book':['HMT12856 — BOOK','دانشنامه ۳۸ فصلی','مرجع آموزشی'],
-        'view-settings':['HMT12856 — SETTINGS','تنظیمات حرفه‌ای','فقط مالک']
+        'view-radar':['HMT12856 — MARKET RADAR','مرکز عملیاتی بازارهای سرمایه پذیر','پدرام همتی (حاج اسماعیل)','جستجوی زندهٔ نمادهای بورس و فرابورس + راهنمای آموزشی انرژی، کالا و رمزارز'],
+        'view-markets':['HMT12856 — ناخدا پدرام','ناخدا پدرام','شاخص‌های زنده · آمپر بازار · گروه‌های سرمایهٔ پذیر',''],
+        'view-groups':['HMT12856 — MARKET GROUPS','گروه‌های بازار سرمایه','بورس · فرابورس · صندوق · انرژی · کالا · رمزارز',''],
+        'view-channels':['HMT12856 — NETWORK','کانال‌های مالک','۱۴ مسیر ارتباطی مستقیم با پدرام همتی',''],
+        'view-portfolio':['HMT12856 — مسیر همت · سبد شخصی','مسیر همت۱۲۸۵۶','از ۱۶ هزار تومان · اردیبهشت ۱۳۹۹ · تا پرتفوی چندکارگزاری',''],
+        'view-legacy':['HMT12856 — LINEAGE','میراث همتی','فرشتگان زمینی · گنجینهٔ خانوادگی',''],
+        'view-articles':['HMT12856 — ARTICLES','مقالات و یادداشت‌ها','قلم حاج اسماعیل همتی',''],
+        'view-book':['HMT12856 — BOOK','دانشنامه ۳۸ فصلی','مرجع آموزشی بازار سرمایه',''],
+        'view-settings':['HMT12856 — SETTINGS','تنظیمات حرفه‌ای','فقط برای مالک سایت — با ورود رمز','']
       },
       en: {
-        'view-radar':['HMT12856 — MARKET RADAR','Capital Markets Ops Center','Pedram Hemmati (Haj Esmail)'],
-        'view-markets':['HMT12856 — Captain','Captain Pedram','Live indices · market gauge'],
-        'view-groups':['HMT12856 — GROUPS','Market Groups','Search & symbol boards'],
-        'view-channels':['HMT12856 — NETWORK','Channels','Contact paths'],
-        'view-portfolio':['HMT12856 — Portfolio','Portfolio Desk','Personal book · Mofid'],
-        'view-legacy':['HMT12856 — LEGACY','Legacy','Family'],
-        'view-articles':['HMT12856 — ARTICLES','Articles','Owner notes'],
-        'view-book':['HMT12856 — BOOK','38-Chapter Book','Educational reference'],
-        'view-settings':['HMT12856 — SETTINGS','Settings','Owner only']
+        'view-radar':['HMT12856 — MARKET RADAR','Capital Markets Ops Center','Pedram Hemmati (Haj Esmail)','Live TSE/IFB symbol search + educational energy, commodity & crypto guide'],
+        'view-markets':['HMT12856 — Captain','Captain Pedram','Live indices · market gauge · capital groups',''],
+        'view-groups':['HMT12856 — MARKET GROUPS','Market Groups','TSE · IFB · Funds · Energy · Commodity · Crypto',''],
+        'view-channels':['HMT12856 — NETWORK','Owner Channels','Direct contact paths',''],
+        'view-portfolio':['HMT12856 — Path & Portfolio','Path of HMT12856','From 16,000 toman (May 2020) to multi-broker book',''],
+        'view-legacy':['HMT12856 — LEGACY','Hemmati Legacy','Family treasury',''],
+        'view-articles':['HMT12856 — ARTICLES','Articles & Notes','Haj Esmail Hemmati',''],
+        'view-book':['HMT12856 — BOOK','38-Chapter Encyclopedia','Educational capital-market reference',''],
+        'view-settings':['HMT12856 — SETTINGS','Pro Settings','Owner only — password',''],
       }
     };
     var H = heroes[lang]||heroes.fa;
@@ -5529,36 +6009,83 @@ var HMT_LEGACY_DEFAULTS = {"portfolio": "data:image/jpeg;base64,/9j/4AAQSkZJRgAB
       var h=H[vid];
       var k=box.querySelector('.hero .kicker'); if(k) k.textContent=h[0];
       var h1=box.querySelector('.hero h1'); if(h1) h1.textContent=h[1];
-      var p=box.querySelector('.hero p'); if(p) p.textContent=h[2];
+      var ps=box.querySelectorAll('.hero p');
+      if(ps[0]) ps[0].textContent=h[2];
+      if(ps[1] && h[3]) ps[1].textContent=h[3];
     });
 
+    // Search placeholder
+    var sp=document.getElementById('symSearch');
+    if(sp) sp.placeholder = lang==='en' ? 'Search symbol… e.g. Foolad, BTC, Gold' : 'جستجوی نماد… مثلاً: فولاد، فملی، بیت‌کوین، طلا';
+
+    // Mission strip
+    var mb=document.getElementById('msBrand');
+    var mk=document.getElementById('msKw');
+    var mg=document.getElementById('msGoGroups');
+    if(mb) mb.textContent = lang==='en' ? 'HMT12856 · Code HMT12856' : 'HMT12856 · همت۱۲۸۵۶';
+    if(mk) mk.textContent = lang==='en'
+      ? 'Keyword radar: Auto · Steel · Bank · Refinery · Cement · Fund'
+      : 'پایش کلمات: خودرو · فولاد · بانک · پالایش · سیمان · صندوق';
+    if(mg) mg.textContent = lang==='en' ? 'Groups →' : 'گروه‌ها ←';
+
+    // Poem keep FA literary unless EN
+    var poem=document.getElementById('poem');
+    if(poem){
+      if(!POEM_FA) POEM_FA = poem.textContent;
+      poem.textContent = lang==='en' ? 'HMT12856 · Pedram Hemmati · Educational Market Radar' : POEM_FA;
+    }
+
     var btn=document.getElementById('langToggle');
-    if(btn) btn.textContent = lang==='fa' ? 'EN' : 'FA';
+    if(btn){ btn.textContent = lang==='fa' ? 'EN' : 'FA'; btn.setAttribute('aria-label', lang==='fa'?'Switch to English':'تغییر به فارسی'); }
+
     try{ if(window.updateCaptainGauge) updateCaptainGauge(); }catch(e){}
   }
   window.applyLangDeep = applyLang;
   window.setSiteLang = applyLang;
+  window.applyLang = applyLang;
 
+  function onLangClick(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var cur = 'fa';
+    try{ cur = localStorage.getItem('hmt-lang')||'fa'; }catch(err){}
+    var next = cur==='fa' ? 'en' : 'fa';
+    applyLang(next);
+    try{ if(typeof saveSettings==='function') saveSettings(); }catch(err){}
+    return false;
+  }
   function bindLangBtn(){
     var btn=document.getElementById('langToggle');
-    if(!btn || btn.__langBound) return;
-    btn.__langBound = true;
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var cur = localStorage.getItem('hmt-lang')||'fa';
-      applyLang(cur==='fa'?'en':'fa');
-      try{ if(typeof saveSettings==='function') saveSettings(); }catch(err){}
-    }, true);
+    if(!btn) return;
+    btn.onclick = onLangClick;
+    btn.addEventListener('click', onLangClick, true);
   }
-  bindLangBtn();
-  document.addEventListener('DOMContentLoaded', function(){
+  function bindMission(){
+    var g=document.getElementById('msGoGroups');
+    if(g && !g.__b){
+      g.__b=1;
+      g.addEventListener('click', function(){
+        if(typeof showView==='function') showView('view-groups');
+        else {
+          document.querySelectorAll('.view-panel').forEach(function(v){v.classList.remove('active')});
+          var el=document.getElementById('view-groups'); if(el) el.classList.add('active');
+        }
+        if(typeof renderMarkets==='function') try{renderMarkets()}catch(e){}
+        if(typeof renderKwBoard==='function') try{renderKwBoard()}catch(e){}
+      });
+    }
+  }
+  function boot(){
     bindLangBtn();
-    applyLang(localStorage.getItem('hmt-lang')||'fa');
-  });
-  // apply ASAP
-  try{ applyLang(localStorage.getItem('hmt-lang')||'fa'); }catch(e){}
+    bindMission();
+    try{ applyLang(localStorage.getItem('hmt-lang')||'fa'); }catch(e){ applyLang('fa'); }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  setTimeout(bindLangBtn, 500);
+  setTimeout(bindLangBtn, 2000);
 })();
+
 
 
 
@@ -5873,6 +6400,306 @@ var HMT_LEGACY_DEFAULTS = {"portfolio": "data:image/jpeg;base64,/9j/4AAQSkZJRgAB
     }
     applyTickerSpeed(getTickerSec());
   });
+})();
+
+</script>
+<script>
+(function wireGroupToolbar(){
+  function bind(){
+    var br=document.getElementById('btnRefreshGroup');
+    if(br && !br.__hmt){
+      br.__hmt=1;
+      br.addEventListener('click', function(){
+        br.textContent='… در حال دریافت';
+        if(typeof refreshGroupQuotes==='function'){
+          refreshGroupQuotes(true);
+          setTimeout(function(){ br.textContent='↻ بروزرسانی تابلو (HMT)'; if(typeof renderMarkets==='function') renderMarkets(); }, 4000);
+        } else br.textContent='↻ بروزرسانی تابلو (HMT)';
+      });
+    }
+    var bt=document.getElementById('btnOpenTsetmc');
+    if(bt && !bt.__hmt){
+      bt.__hmt=1;
+      bt.addEventListener('click', function(){ window.open('https://www.tsetmc.com/MarketWatch','_blank','noopener'); });
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
+})();
+</script>
+<script>
+
+(function HMTSettingsPro(){
+  function $(id){ return document.getElementById(id); }
+  function refreshDash(){
+    try{
+      var n = (typeof SYMS!=='undefined') ? SYMS.length : 0;
+      var live = 0, newest = 0;
+      if(typeof SYMS!=='undefined'){
+        SYMS.forEach(function(s){
+          if(s[3]>0) live++;
+          if(s.asOf && s.asOf>newest) newest=s.asOf;
+        });
+      }
+      var kw = (typeof HMT_KW_MAP!=='undefined') ? Object.keys(HMT_KW_MAP).length : 0;
+      if($('dashSymCount')) $('dashSymCount').textContent = n;
+      if($('dashLiveCount')) $('dashLiveCount').textContent = live;
+      if($('dashKwCount')) $('dashKwCount').textContent = kw;
+      if($('dashAsOf')) $('dashAsOf').textContent = newest ? new Date(newest).toLocaleTimeString('fa-IR') : '—';
+    }catch(e){}
+  }
+  function applySeo(){
+    var t=$('s-seo-title'), d=$('s-seo-desc'), c=$('s-seo-canonical'), r=$('s-seo-robots'), k=$('s-seo-keys');
+    if(t && t.value){ document.title=t.value; var el=document.getElementById('docTitle'); if(el) el.textContent=t.value; }
+    if(d && d.value){
+      var md=document.getElementById('metaDescription')||document.querySelector('meta[name="description"]');
+      if(md) md.setAttribute('content', d.value);
+    }
+    if(c && c.value){
+      var can=document.querySelector('link[rel="canonical"]');
+      if(can) can.setAttribute('href', c.value);
+    }
+    if(r && r.value){
+      var rob=document.querySelector('meta[name="robots"]');
+      if(rob) rob.setAttribute('content', r.value);
+      else {
+        rob=document.createElement('meta'); rob.name='robots'; rob.content=r.value; document.head.appendChild(rob);
+      }
+    }
+    if(k && k.value){
+      var mk=document.querySelector('meta[name="keywords"]');
+      if(!mk){ mk=document.createElement('meta'); mk.name='keywords'; document.head.appendChild(mk); }
+      mk.setAttribute('content', k.value);
+    }
+    try{
+      if(!window.settings) window.settings={};
+      settings.seo={title:t&&t.value, desc:d&&d.value, keys:k&&k.value, canonical:c&&c.value, robots:r&&r.value};
+      localStorage.setItem('hmt-settings-seo', JSON.stringify(settings.seo));
+    }catch(e){}
+    if($('seoAuditOut')) $('seoAuditOut').textContent='SEO اعمال شد · '+new Date().toLocaleString('fa-IR');
+  }
+  function seoAudit(){
+    var lines=[];
+    lines.push('Title: '+(document.title||'—'));
+    var md=document.querySelector('meta[name="description"]');
+    lines.push('Description: '+(md?md.content:'MISSING'));
+    var can=document.querySelector('link[rel="canonical"]');
+    lines.push('Canonical: '+(can?can.href:'MISSING'));
+    var rob=document.querySelector('meta[name="robots"]');
+    lines.push('Robots: '+(rob?rob.content:'default'));
+    lines.push('JSON-LD scripts: '+document.querySelectorAll('script[type="application/ld+json"]').length);
+    lines.push('H1 count: '+document.querySelectorAll('h1').length);
+    lines.push('SYMS: '+(typeof SYMS!=='undefined'?SYMS.length:0));
+    lines.push('Advice: Search Console property = canonical only; submit sitemap.xml; Request indexing.');
+    if($('seoAuditOut')) $('seoAuditOut').textContent=lines.join('\n');
+  }
+  function bind(){
+    // restore seo fields
+    try{
+      var s=JSON.parse(localStorage.getItem('hmt-settings-seo')||'null');
+      if(s){
+        if(s.title&&$('s-seo-title')) $('s-seo-title').value=s.title;
+        if(s.desc&&$('s-seo-desc')) $('s-seo-desc').value=s.desc;
+        if(s.keys&&$('s-seo-keys')) $('s-seo-keys').value=s.keys;
+        if(s.canonical&&$('s-seo-canonical')) $('s-seo-canonical').value=s.canonical;
+        if(s.robots&&$('s-seo-robots')) $('s-seo-robots').value=s.robots;
+      }
+    }catch(e){}
+    if($('btnApplySeo')) $('btnApplySeo').onclick=applySeo;
+    if($('btnSeoAudit')) $('btnSeoAudit').onclick=seoAudit;
+    if($('dashRefreshQuotes')) $('dashRefreshQuotes').onclick=function(){
+      if(typeof refreshGroupQuotes==='function') refreshGroupQuotes(true);
+      setTimeout(refreshDash, 3000);
+    };
+    if($('dashRebuildTicker')) $('dashRebuildTicker').onclick=function(){
+      if(typeof buildTicker==='function') buildTicker();
+      refreshDash();
+    };
+    if($('dashClearQuoteCache')) $('dashClearQuoteCache').onclick=function(){
+      try{ localStorage.removeItem('hmt-last-quotes'); }catch(e){}
+      alert('کش قیمت پاک شد. با بروزرسانی دوباره پر می‌شود.');
+    };
+    if($('dashOpenGroups')) $('dashOpenGroups').onclick=function(){
+      if(typeof showView==='function') showView('view-groups');
+    };
+    if($('btnApplyRadarCtl')) $('btnApplyRadarCtl').onclick=function(){
+      try{
+        var cfg={
+          speed: Number($('s-radar-speed2')&&$('s-radar-speed2').value)||2800,
+          max: Number($('s-radar-max2')&&$('s-radar-max2').value)||24,
+          quoteInterval: Number($('s-quote-interval')&&$('s-quote-interval').value)||120,
+          trend: ($('s-trend-labels')&&$('s-trend-labels').value)!=='0'
+        };
+        localStorage.setItem('hmt-radar-cfg', JSON.stringify(cfg));
+        if($('radarSpeed')) $('radarSpeed').value=cfg.speed;
+        if($('radarMaxSym')) $('radarMaxSym').value=cfg.max;
+        alert('تنظیمات رادار ذخیره شد');
+      }catch(e){ alert('خطا در ذخیره'); }
+    };
+    if($('btnForceQuoteNow')) $('btnForceQuoteNow').onclick=function(){
+      if(typeof refreshGroupQuotes==='function') refreshGroupQuotes(true);
+    };
+    // tab switching already exists; ensure dash refresh on open settings
+    document.querySelectorAll('#setTabs .set-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){ if(btn.getAttribute('data-t')==='dash') refreshDash(); });
+    });
+    refreshDash();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
+})();
+
+</script>
+<script>
+
+(function HMTAuthJourney(){
+  var FAIL_KEY='hmt-gate-fails';
+  var LOCK_KEY='hmt-gate-lockuntil';
+  function $(id){return document.getElementById(id)}
+  function applyJourney(){
+    try{
+      var j=JSON.parse(localStorage.getItem('hmt-journey')||'null');
+      if(!j) return;
+      var story=document.querySelector('#journeyStory p');
+      if(story && j.text) story.innerHTML=j.text;
+      function slot(id, src){
+        var el=$(id); if(!el||!src) return;
+        if(/^data:image|^https?:\/\//i.test(src.trim()))
+          el.innerHTML='<img alt="notebook" src="'+src.trim().replace(/"/g,'')+'">';
+      }
+      slot('nbSlot1', j.nb1); slot('nbSlot2', j.nb2);
+      var ab=$('journeyAudioBox');
+      if(ab && j.audio){
+        ab.innerHTML='<audio controls preload="none" style="width:100%;margin-top:4px"><source src="'+j.audio.replace(/"/g,'')+'"></audio>';
+      }
+    }catch(e){}
+  }
+  function saveJourney(){
+    var j={
+      text: ($('s-journey-text')&&$('s-journey-text').value)||'',
+      nb1: ($('s-nb1')&&$('s-nb1').value)||'',
+      nb2: ($('s-nb2')&&$('s-nb2').value)||'',
+      audio: ($('s-journey-audio')&&$('s-journey-audio').value)||'',
+      linkedin: ($('s-journey-linkedin')&&$('s-journey-linkedin').value)||''
+    };
+    localStorage.setItem('hmt-journey', JSON.stringify(j));
+    applyJourney();
+    alert('مسیر همت ذخیره شد');
+  }
+  function hardenGate(){
+    var btn=$('pwBtn'), inp=$('pwInput'), msg=$('pwMsg');
+    if(!btn||btn.__hmtHard) return;
+    btn.__hmtHard=1;
+    // rate limit wrapper around existing tryUnlock
+    var origClick = function(){
+      var until=Number(localStorage.getItem(LOCK_KEY)||0);
+      if(Date.now()<until){
+        if(msg) msg.textContent='قفل موقت — چند دقیقه صبر کنید';
+        return;
+      }
+      // call native if present
+      if(typeof tryUnlock==='function'){
+        tryUnlock();
+      }
+      // if still gated after click, count fail
+      setTimeout(function(){
+        var cons=$('console');
+        if(cons && cons.style.display==='none'){
+          var f=Number(localStorage.getItem(FAIL_KEY)||0)+1;
+          localStorage.setItem(FAIL_KEY,String(f));
+          if(f>=5){
+            localStorage.setItem(LOCK_KEY, String(Date.now()+5*60*1000));
+            localStorage.setItem(FAIL_KEY,'0');
+            if(msg) msg.textContent='۵ تلاش ناموفق — قفل ۵ دقیقه‌ای';
+          }
+        } else {
+          localStorage.setItem(FAIL_KEY,'0');
+          // session flag
+          try{ sessionStorage.setItem('hmt-owner-session','1'); }catch(e){}
+        }
+      }, 50);
+    };
+    btn.addEventListener('click', origClick);
+    if(inp){ inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); btn.click(); }}); }
+    // auto reopen session
+    try{
+      if(sessionStorage.getItem('hmt-owner-session')==='1'){
+        var g=$('gate'), c=$('console');
+        if(g&&c){ g.style.display='none'; c.style.display='block'; }
+      }
+    }catch(e){}
+  }
+  function bind(){
+    hardenGate();
+    if($('btnSaveJourney')) $('btnSaveJourney').onclick=saveJourney;
+    // restore journey fields when settings open
+    try{
+      var j=JSON.parse(localStorage.getItem('hmt-journey')||'null');
+      if(j){
+        if(j.text&&$('s-journey-text')) $('s-journey-text').value=j.text;
+        if(j.nb1&&$('s-nb1')) $('s-nb1').value=j.nb1;
+        if(j.nb2&&$('s-nb2')) $('s-nb2').value=j.nb2;
+        if(j.audio&&$('s-journey-audio')) $('s-journey-audio').value=j.audio;
+        if(j.linkedin&&$('s-journey-linkedin')) $('s-journey-linkedin').value=j.linkedin;
+      }
+    }catch(e){}
+    applyJourney();
+    // ensure set-tab switching works for new tabs
+    document.querySelectorAll('#setTabs .set-tab').forEach(function(t){
+      if(t.__hmtTab) return; t.__hmtTab=1;
+      t.addEventListener('click', function(){
+        document.querySelectorAll('#setTabs .set-tab').forEach(function(x){x.classList.toggle('on',x===t)});
+        var key=t.getAttribute('data-t');
+        document.querySelectorAll('.set-pane').forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-p')===key); });
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
+})();
+
+</script>
+<script>
+
+(function HMTRadarAtmosphere(){
+  function fillMatrix(){
+    var el=document.getElementById('radarMatrix');
+    if(!el) return;
+    var list=[];
+    try{
+      if(typeof SYMS!=='undefined'){
+        SYMS.forEach(function(s){
+          if(!s||!s[0]) return;
+          if(s[1]==='bourse'||s[1]==='farabourse'||s[1]==='funds') list.push(s[0]);
+        });
+      }
+    }catch(e){}
+    if(!list.length){
+      list=['خودرو','خساپا','فولاد','فملی','شپنا','وبملت','وتجارت','سیتا','فارس','شستا','وغدیر','شتران','شبندر','کگل','کچاد'];
+    }
+    // unique, max ~28 for readability at 20% opacity
+    var seen={}, out=[];
+    list.forEach(function(x){ if(!seen[x]){ seen[x]=1; out.push(x); }});
+    out=out.slice(0,28);
+    el.innerHTML=out.map(function(s){ return '<span>'+s+'</span>'; }).join('');
+  }
+  function touchInfo(){
+    var a=document.getElementById('radarInfo1');
+    if(!a) return;
+    var n=0, live=0;
+    try{
+      if(typeof SYMS!=='undefined'){
+        SYMS.forEach(function(s){
+          if(s[1]==='bourse'||s[1]==='farabourse'){ n++; if(s.live) live++; }
+        });
+      }
+    }catch(e){}
+    a.innerHTML='<b>وضعیت پایش:</b> '+n+' نماد بورسی/فرابورسی در فهرست · '+live+' با برچسب زنده · '+(navigator.onLine?'شبکه متصل':'آفلاین');
+  }
+  function boot(){ fillMatrix(); touchInfo(); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  setInterval(touchInfo, 20000);
 })();
 
 </script>
